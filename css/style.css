@@ -30,11 +30,20 @@
 
 
   /* ---COLORS--- */
---color-primary: ;
---color-: ;
---color-: ;
---color-: ;
---color-: ;
---color-: ;
+--color-primary: #8B0000;
+--color-secondary: #2B2B2B;
+--color-bg-main: #0B0F0E;
+--color-bg-overlay: rgba(0, 0, 0, 0.06);
+
+--color-text-muted: #B3B3B3;
+--color-text-main: #fff;
+
+--color-hover: #631313;
+--color-reattempt-hover: #602B2B;
+
+--color-reattempt-btn: #C54444;
+--color-next-btn: #152712;
+--color-next-btn: #29641F;
+
 }
 
