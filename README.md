@@ -44,3 +44,6 @@ Para generar tareas, NOS MOVEMOS con git checkout A LA RAMA DEV Y CREAMOS LA RAM
 
 ¿POR QUE SE HACE ESTO?
 Porque a la hora de crear una rama, la rama en la que estas posicionado es la que usa como BASE para crear la RAMA
+
+TRABAJO PARA DESKTOP: 
+CAMBIAR A CLAMP los tamaños de los h1, h2 y p si es necesario, altura máxima de header
