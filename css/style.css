@@ -18,8 +18,8 @@
 */
 --font-body: 'Roboto', sans-serif;    /* p */
 /* --- FONT SIZE --- */
---font-size-h1: 1.5rem; /* ~40px */
---font-size-h2: 2rem;   /* ~32px */
+--font-size-h1: 1.5rem; /* ~24px */
+--font-size-h2: 1.25rem;   /* ~20px */
 --font-size-p: 1rem;    /* 16px */
 
 /* --- FONT WEIGHT --- */
@@ -58,6 +58,9 @@ header {
   font-family: var(--font-heading);
   background-color: gainsboro;
   flex-shrink: 0;
+
+  position: relative;
+  box-shadow: 0px 12px 10px rgba(0, 0, 0, 0.4);
 }
 
 .header-container {
@@ -153,6 +156,8 @@ main {
   font-family: var(--font-heading);
 
   text-align: center;
+  -webkit-text-stroke: 1px black;
+
   padding-bottom: var(--space-xl);
 }
 .hero-container p {
@@ -168,6 +173,11 @@ main {
   display: flex;
   width: fit-content;
   margin: 0 auto;
+
+  position: relative;
+  z-index: 10;
+
+  box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.6);
   
   text-decoration: none;
   color: inherit;
