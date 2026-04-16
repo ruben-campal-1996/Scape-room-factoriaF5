@@ -1,0 +1,113 @@
+/* ========================= */
+/* 🧟 RETO 3 - PANTALLA */
+/* ========================= */
+
+#reto3-container {
+  padding: var(--space-xl);
+  color: var(--color-text-main);
+}
+
+/* CONTENIDO GENERAL */
+.reto3-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+.titulo-emergente{
+   
+ 
+  transform: translateX(-50%);
+
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+
+  color: var(--color-text-main);
+
+  text-shadow: 0 0 10px black;
+}
+
+/* ========================= */
+/* 🖼️ IMAGEN */
+/* ========================= */
+
+.imagen-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.imagen-container img {
+  width: 100%;
+  max-width: 500px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+
+  /* efecto oscuro tipo juego */
+  filter: brightness(0.6);
+}
+
+
+/* ========================= */
+/* 📖 TEXTO HISTORIA */
+/* ========================= */
+
+.texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-p);
+
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* ========================= */
+/* 🔴 BOTÓN */
+/* ========================= */
+
+.boton-container {
+  display: flex;
+  justify-content: center;
+}
+
+.boton-container button {
+  background-color: var(--color-primary);
+  color: var(--color-text-main);
+
+  padding: 14px 40px;
+  border: none;
+  border-radius: 30px;
+
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+
+  cursor: pointer;
+
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
+}
+
+.boton-container button:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.05);
+}
+
+/* ========================= */
+/* 📱 RESPONSIVE */
+/* ========================= */
+
+@media (min-width: 768px) {
+  .imagen-container img {
+    height: 400px;
+    padding: 3rem;
+  }
+
+  .texto {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
