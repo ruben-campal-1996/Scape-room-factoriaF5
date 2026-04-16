@@ -48,6 +48,14 @@ Porque a la hora de crear una rama, la rama en la que estas posicionado es la qu
 TRABAJO PARA DESKTOP: 
 CAMBIAR A CLAMP los tamaños de los h1, h2 y p si es necesario, altura máxima de header
 
+PROPUESTAS 
+partición de maquetación y código:
+- JS: reto1, reto2, reto3
+- CSS: reto1, reto2, reto3
+
+Mirar color border header footer
+
+
 COSAS POST MINIMO COMUN MULTIPLO:
 Añadir sombras a elementos
 Animaciones
