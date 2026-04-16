@@ -8,6 +8,7 @@ function escena1Reto2(){
     
     const nuevaSection = document.createElement("section")
     const divGeneral = document.createElement("div")
+    const contentContainer = document.createElement("div")
     const imgContainer = document.createElement("div")
     const img = document.createElement("img")
     const h1 = document.createElement("h1")
@@ -23,6 +24,7 @@ const boton = document.createElement("button")
 
 nuevaSection.id = "reto2"
 divGeneral.classList.add("general-container")
+contentContainer.classList.add("content-container")
 imgContainer.classList.add("img-container")
 textContainer.classList.add("text-container")
 h1.textContent="¡HAS DESCRIFADO LA CONTRASEÑA!"
@@ -35,21 +37,21 @@ textos.forEach(texto => {   //Introducir los párrafos dentro del div contenedor
     textContainer.appendChild(p) 
 })
 
-img.src="/img/resources/reto-2-1.png"
+img.src="/assets/img/resources/reto-2-1.png"
 img.alt="zombies intentando entrar por una puerta"
 
 main.appendChild(nuevaSection)
 nuevaSection.appendChild(divGeneral)
 divGeneral.appendChild(imgContainer)
-divGeneral.appendChild(h1)
-divGeneral.appendChild(textContainer)
+divGeneral.appendChild(contentContainer)
+contentContainer.appendChild(h1)
+contentContainer.appendChild(textContainer)
 imgContainer.appendChild(img)
-divGeneral.appendChild(boton)
+contentContainer.appendChild(boton)
 
 boton.addEventListener("click", () => {
     limpiarPantalla()
 })
 }
-
 
 escena1Reto2()
