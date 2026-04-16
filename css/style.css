@@ -125,7 +125,7 @@ header {
 main {
   flex:1;
 
-  background-image: url(/img/resources/hero.png);
+  background-image: url(/assets/img/resources/hero.png);
   background-position: center;
   background-size: cover;
 }
