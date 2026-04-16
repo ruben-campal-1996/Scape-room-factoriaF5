@@ -1,0 +1,10 @@
+.main-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.img-user {
+  width: 300px;
+  border-radius: 100%;
+}
