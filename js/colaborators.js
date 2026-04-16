@@ -3,7 +3,7 @@ const creator = [
     name: "Ada Florido",
     img: "https://avatars.githubusercontent.com/u/260862430?v=4",
     url: "https://github.com/aflorido266",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/florido-ada-506a9769/",
   },
   {
     name: "Jose Luis Castro García",
