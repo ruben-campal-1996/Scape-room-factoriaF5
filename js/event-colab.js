@@ -33,13 +33,17 @@ function mostrarCreadores() {
     const url_creador = document.createElement("a");
     url_creador.href = person.url;
     url_creador.classList.add('creator-link', 'btn-git')
-    url_creador.textContent = "Ver perfil"; 
+    url_creador.textContent = "Ver perfil";
+    url_creador.target = "_blank";
+    url_creador.rel = "noopener noreferrer";
     socials_creator.appendChild(url_creador);
 
     const linkedIn = document.createElement("a");
     linkedIn.href = person.linkedin;
     linkedIn.classList.add('creator-link', 'btn-linkedin');
-    linkedIn.textContent = "Ver Linkedin"; 
+    linkedIn.textContent = "Ver Linkedin";
+    linkedIn.target = "_blank";
+    linkedIn.rel = "noopener noreferrer";
     socials_creator.appendChild(linkedIn);
 
     container_creators.appendChild(creatorCard);
