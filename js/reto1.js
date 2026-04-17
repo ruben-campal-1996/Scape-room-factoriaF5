@@ -1,7 +1,20 @@
 export function reto1() {
-  const reto1 = document.getElementById("reto-1");
+  const contenedor = document.getElementById("reto-1");
 
-  reto1.innerHTML = "";
+  
+  contenedor.innerHTML = "";
+  contenedor.className = "pantalla-contexto";
+  
+
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("img-container");
+
+  const img = document.createElement("img");
+  img.src = "/img/resources/reto1.png";
+  imgContainer.appendChild(img);
+
+  const textoContainer = document.createElement("div");
+  textoContainer.classList.add("texto-container");
 
   const titulo = document.createElement("h1");
   titulo.textContent = "PRIMER RETO";
@@ -12,75 +25,106 @@ export function reto1() {
 
   const boton = document.createElement("button");
   boton.textContent = "ACERCARSE A LA PUERTA";
+  boton.classList.add("btn-rojo");
 
   boton.addEventListener("click", () => {
-    reto1.innerHTML = "";
+  contenedor.innerHTML = "";
 
-    const titulo2 = document.createElement("h2");
-    titulo2.textContent = "RESUELVE PARA CONTINUAR";
+  // 🔥 CAMBIO 1: usar classList en vez de className
+  contenedor.classList.add("pantalla-reto");
 
-    const texto2 = document.createElement("p");
-    texto2.textContent = "(14 + 6) * (22 + 1) * (20/4) + (30 * 15)";
+  // 🔥 CAMBIO 2: contenedor general (para centrar todo)
+  const wrapper = document.createElement("div");
+  wrapper.classList.add("reto-container");
 
-    // inputs
-    const i1 = document.createElement("input");
-    const i2 = document.createElement("input");
-    const i3 = document.createElement("input");
-    const i4 = document.createElement("input");
+  // 🔥 CAMBIO 3: título
+  const titulo2 = document.createElement("h2");
+  titulo2.textContent = "RESUELVE PARA CONTINUAR:";
 
-    i1.maxLength = 1;
-    i2.maxLength = 1;
-    i3.maxLength = 1;
-    i4.maxLength = 1;
+  // 🔥 CAMBIO 4: imagen del teclado
+  const teclado = document.createElement("div");
+  teclado.classList.add("teclado-img");
 
-    // botón comprobar
-    const comprobar = document.createElement("button");
-    comprobar.textContent = "COMPROBAR";
+  // 🔥 CAMBIO 5: dividir operación en 2 líneas (como la imagen)
+  const operacion1 = document.createElement("p");
+  operacion1.textContent = "(4 + 6) × (2 + 1)";
 
-    // resultado
-    const resultado = document.createElement("p");
+  const operacion2 = document.createElement("p");
+  operacion2.textContent = "(20 ÷ 4) + (3 × 2)";
 
-    comprobar.addEventListener("click", () => {
-      const codigo = i1.value + i2.value + i3.value + i4.value;
+  // 🔥 CAMBIO 6: contenedor de inputs
+  const inputsContainer = document.createElement("div");
+  inputsContainer.classList.add("codigo-container");
 
-      if (codigo === "2750") {
-        reto1.innerHTML = "";
-        const correcto = document.createElement("h2");
-        correcto.textContent = "!CODIGO CORRECTO!";
-        const botonOk = document.createElement("button");
-        botonOk.textContent = "SIGUIENTE";
+  // 🔥 CAMBIO 7: inputs dinámicos (más limpio)
+  const inputs = [];
 
-// 🔥 AQUÍ va el evento
-        botonOk.addEventListener("click", () => {
-        reto2(); // ir al siguiente reto
-});
+  for (let i = 0; i < 4; i++) {
+    const input = document.createElement("input");
+    input.maxLength = 1;
+    input.classList.add("codigo-input");
 
-// luego lo pintas
-reto1.appendChild(correcto);
-reto1.appendChild(botonOk);
+    inputs.push(input);
+    inputsContainer.appendChild(input);
+  }
 
-      } else {
-        reto1.innerHTML = "";
-        const incorrecto = document.createElement("h2");
-        incorrecto.textContent = "!CODIGO INCORRECTO!";
-        const botonNook = document.createElement("button");
-        botonNook.textContent = "REINTENTAR";     
-        reto1.appendChild(incorrecto);
-        reto1.appendChild(botonNook)
-      }
-    });
+  // 🔥 CAMBIO 8: botón
+  const comprobar = document.createElement("button");
+  comprobar.textContent = "INTRODUCIR CODIGO";
+  comprobar.classList.add("btn-rojo");
 
-    reto1.appendChild(titulo2);
-    reto1.appendChild(texto2);
-    reto1.appendChild(i1);
-    reto1.appendChild(i2);
-    reto1.appendChild(i3);
-    reto1.appendChild(i4);
-    reto1.appendChild(comprobar);
-    reto1.appendChild(resultado);
+  // 🔥 CAMBIO 9: lógica usando array (más pro)
+  comprobar.addEventListener("click", () => {
+    const codigo = inputs.map(i => i.value).join("");
+
+    if (codigo === "2750") {
+      contenedor.innerHTML = "";
+
+      const correcto = document.createElement("h2");
+      correcto.textContent = "¡CÓDIGO CORRECTO!";
+
+      const botonOk = document.createElement("button");
+      botonOk.textContent = "SIGUIENTE";
+
+      botonOk.addEventListener("click", () => {
+        reto2();
+      });
+
+      contenedor.appendChild(correcto);
+      contenedor.appendChild(botonOk);
+    } else {
+      contenedor.innerHTML = "";
+
+      const incorrecto = document.createElement("h2");
+      incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
+
+      const botonNook = document.createElement("button");
+      botonNook.textContent = "REINTENTAR";
+
+      botonNook.addEventListener("click", () => {
+        reto1();
+      });
+
+      contenedor.appendChild(incorrecto);
+      contenedor.appendChild(botonNook);
+    }
   });
 
-  reto1.appendChild(titulo);
-  reto1.appendChild(texto);
-  reto1.appendChild(boton);
+  // 🔥 CAMBIO 10: orden visual (muy importante)
+  wrapper.appendChild(titulo2);
+  wrapper.appendChild(teclado);
+  wrapper.appendChild(operacion1);
+  wrapper.appendChild(operacion2);
+  wrapper.appendChild(inputsContainer);
+  wrapper.appendChild(comprobar);
+
+  contenedor.appendChild(wrapper);
+});
+
+  contenedor.appendChild(imgContainer);
+
+  contenedor.appendChild(textoContainer);
+  textoContainer.appendChild(titulo);
+  textoContainer.appendChild(texto);
+  textoContainer.appendChild(boton);
 }
