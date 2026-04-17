@@ -47,9 +47,9 @@ export function reto1() {
         reto1.innerHTML = "";
         const correcto = document.createElement("h2");
         correcto.textContent = "!CODIGO CORRECTO!";
-      
         const botonOk = document.createElement("button");
         botonOk.textContent = "SIGUIENTE"
+        
 
         reto1.appendChild(correcto)
         reto1.appendChild(botonOk)
