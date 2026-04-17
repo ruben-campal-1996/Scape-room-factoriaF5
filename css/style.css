@@ -203,26 +203,4 @@ footer {
   flex-shrink: 0;
 }
 
- /*  ---MEDIAQUERIES--- */
-@media (min-width: 550px) {
-  .open-menu, .close-menu {
-    display: none;
-  }
-  .nav {
-    visibility: visible;
-    opacity: 1;
-    position: static;
-    color: var(--color-secondary);
-    background-color: transparent;
-    box-shadow: none;
-    padding: 0;
-
-    flex-direction: row;
-    height: auto;
-  }
-
-  .nav-list {
-    flex-direction: row;
-    gap: var(--space-lg);
-  }
-}
+ 

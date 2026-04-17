@@ -285,6 +285,16 @@
     
   }
 
+  .btn-verde {
+    background-color: #29641F;
+    color: var(--color-text-main);
+    padding: 8px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    
+  }
+
 
 .pantalla-reto {
   background-image: url("/img/resources/codigoPuerta.jpeg");
@@ -308,8 +318,10 @@
   background-image: url("/img/resources/codigoPuerta.jpeg");
   background-size: cover;
   background-position: center;
+  background: transparent;
   border-radius: 12px;
-  box-shadow: 0px 8px 10px rgba(0,0,0,0.5);
+  box-shadow: none;
+  
 }
 .codigo-container {
   display: flex;
@@ -326,14 +338,35 @@
   border: none;
   outline: none;
 }
-/* 🔥 EFECTO CUANDO ESCRIBES */
+
 .codigo-input:focus {
-  outline: 2px solid red;
+  outline: 2px solid var(--color-primary);
 }
 
-/* 🔥 BOTÓN (ya tienes .btn-rojo, esto es mejora visual) */
+
 .btn-rojo {
   margin-top: 10px;
+  margin-bottom: 100px;
   font-weight: bold;
 }
 
+.btn-verde{
+  margin-top: 10px;
+  margin-bottom: 100px;
+  font-weight: bold;
+}
+
+.resultado-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100vh;
+  padding-bottom: 60px;
+}
+.correcto-texto {
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+  max-width: 90%;
+}

@@ -1,11 +1,10 @@
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
 
-  
   contenedor.innerHTML = "";
   contenedor.className = "pantalla-contexto";
-  
 
+  // 🔹 IMAGEN
   const imgContainer = document.createElement("div");
   imgContainer.classList.add("img-container");
 
@@ -13,6 +12,7 @@ export function reto1() {
   img.src = "/img/resources/reto1.png";
   imgContainer.appendChild(img);
 
+  // 🔹 TEXTO
   const textoContainer = document.createElement("div");
   textoContainer.classList.add("texto-container");
 
@@ -27,103 +27,113 @@ export function reto1() {
   boton.textContent = "ACERCARSE A LA PUERTA";
   boton.classList.add("btn-rojo");
 
+  // 🔥 EVENTO PRINCIPAL
   boton.addEventListener("click", () => {
+    contenedor.innerHTML = "";
+    contenedor.classList.add("pantalla-reto");
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("reto-container");
+
+    const titulo2 = document.createElement("h2");
+    titulo2.textContent = "RESUELVE PARA CONTINUAR:";
+
+    const teclado = document.createElement("div");
+    teclado.classList.add("teclado-img");
+
+    const operacion1 = document.createElement("p");
+    operacion1.textContent = "(4 + 6) × (2 + 1)";
+
+    const operacion2 = document.createElement("p");
+    operacion2.textContent = "(20 ÷ 4) + (3 × 2)";
+
+    // 🔹 INPUTS
+    const inputsContainer = document.createElement("div");
+    inputsContainer.classList.add("codigo-container");
+
+    const inputs = [];
+
+    for (let i = 0; i < 4; i++) {
+      const input = document.createElement("input");
+      input.maxLength = 1;
+      input.classList.add("codigo-input");
+
+      inputs.push(input);
+      inputsContainer.appendChild(input);
+    }
+
+    // 🔹 BOTÓN
+    const comprobar = document.createElement("button");
+    comprobar.textContent = "INTRODUCIR CODIGO";
+    comprobar.classList.add("btn-rojo");
+
+    // 🔥 VALIDACIÓN
+    comprobar.addEventListener("click", () => {
+      const codigo = inputs.map((i) => i.value).join("");
+
+if (codigo === "2750") {
   contenedor.innerHTML = "";
 
-  // 🔥 CAMBIO 1: usar classList en vez de className
-  contenedor.classList.add("pantalla-reto");
+  const resultadoWrapper = document.createElement("div");
+  resultadoWrapper.classList.add("resultado-container");
 
-  // 🔥 CAMBIO 2: contenedor general (para centrar todo)
-  const wrapper = document.createElement("div");
-  wrapper.classList.add("reto-container");
+  const correcto = document.createElement("h2");
+  correcto.textContent = "¡CÓDIGO CORRECTO!";
+  correcto.classList.add("correcto-texto");
 
-  // 🔥 CAMBIO 3: título
-  const titulo2 = document.createElement("h2");
-  titulo2.textContent = "RESUELVE PARA CONTINUAR:";
+  const botonOk = document.createElement("button");
+  botonOk.textContent = "SIGUIENTE";
+  botonOk.classList.add("btn-verde");
 
-  // 🔥 CAMBIO 4: imagen del teclado
-  const teclado = document.createElement("div");
-  teclado.classList.add("teclado-img");
-
-  // 🔥 CAMBIO 5: dividir operación en 2 líneas (como la imagen)
-  const operacion1 = document.createElement("p");
-  operacion1.textContent = "(4 + 6) × (2 + 1)";
-
-  const operacion2 = document.createElement("p");
-  operacion2.textContent = "(20 ÷ 4) + (3 × 2)";
-
-  // 🔥 CAMBIO 6: contenedor de inputs
-  const inputsContainer = document.createElement("div");
-  inputsContainer.classList.add("codigo-container");
-
-  // 🔥 CAMBIO 7: inputs dinámicos (más limpio)
-  const inputs = [];
-
-  for (let i = 0; i < 4; i++) {
-    const input = document.createElement("input");
-    input.maxLength = 1;
-    input.classList.add("codigo-input");
-
-    inputs.push(input);
-    inputsContainer.appendChild(input);
-  }
-
-  // 🔥 CAMBIO 8: botón
-  const comprobar = document.createElement("button");
-  comprobar.textContent = "INTRODUCIR CODIGO";
-  comprobar.classList.add("btn-rojo");
-
-  // 🔥 CAMBIO 9: lógica usando array (más pro)
-  comprobar.addEventListener("click", () => {
-    const codigo = inputs.map(i => i.value).join("");
-
-    if (codigo === "2750") {
-      contenedor.innerHTML = "";
-
-      const correcto = document.createElement("h2");
-      correcto.textContent = "¡CÓDIGO CORRECTO!";
-
-      const botonOk = document.createElement("button");
-      botonOk.textContent = "SIGUIENTE";
-
-      botonOk.addEventListener("click", () => {
-        reto2();
-      });
-
-      contenedor.appendChild(correcto);
-      contenedor.appendChild(botonOk);
-    } else {
-      contenedor.innerHTML = "";
-
-      const incorrecto = document.createElement("h2");
-      incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
-
-      const botonNook = document.createElement("button");
-      botonNook.textContent = "REINTENTAR";
-
-      botonNook.addEventListener("click", () => {
-        reto1();
-      });
-
-      contenedor.appendChild(incorrecto);
-      contenedor.appendChild(botonNook);
-    }
+  botonOk.addEventListener("click", () => {
+    reto2();
   });
 
-  // 🔥 CAMBIO 10: orden visual (muy importante)
-  wrapper.appendChild(titulo2);
-  wrapper.appendChild(teclado);
-  wrapper.appendChild(operacion1);
-  wrapper.appendChild(operacion2);
-  wrapper.appendChild(inputsContainer);
-  wrapper.appendChild(comprobar);
+  resultadoWrapper.appendChild(correcto);
+  resultadoWrapper.appendChild(botonOk);
 
-  contenedor.appendChild(wrapper);
-});
+  contenedor.appendChild(resultadoWrapper);
+} else {
+        contenedor.innerHTML = "";
+        contenedor.classList.add("pantalla-reto");
 
+        const errorWrapper = document.createElement("div");
+        errorWrapper.classList.add("resultado-container");
+
+        const incorrecto = document.createElement("h2");
+        incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
+        incorrecto.classList.add("error-texto");
+
+        const botonNook = document.createElement("button");
+        botonNook.textContent = "REINTENTAR";
+        botonNook.classList.add("btn-rojo");
+
+        botonNook.addEventListener("click", () => {
+          reto1(); // 🔁 reinicia
+        });
+
+        errorWrapper.appendChild(incorrecto);
+        errorWrapper.appendChild(botonNook);
+
+        contenedor.appendChild(errorWrapper);
+      }
+    });
+
+    // 🔹 ORDEN FINAL
+    wrapper.appendChild(titulo2);
+    wrapper.appendChild(teclado);
+    wrapper.appendChild(operacion1);
+    wrapper.appendChild(operacion2);
+    wrapper.appendChild(inputsContainer);
+    wrapper.appendChild(comprobar);
+
+    contenedor.appendChild(wrapper);
+  });
+
+  // 🔹 MONTAJE INICIAL
   contenedor.appendChild(imgContainer);
-
   contenedor.appendChild(textoContainer);
+
   textoContainer.appendChild(titulo);
   textoContainer.appendChild(texto);
   textoContainer.appendChild(boton);
