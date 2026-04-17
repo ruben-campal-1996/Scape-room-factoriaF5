@@ -48,11 +48,16 @@ export function reto1() {
         const correcto = document.createElement("h2");
         correcto.textContent = "!CODIGO CORRECTO!";
         const botonOk = document.createElement("button");
-        botonOk.textContent = "SIGUIENTE"
-        
+        botonOk.textContent = "SIGUIENTE";
 
-        reto1.appendChild(correcto)
-        reto1.appendChild(botonOk)
+// 🔥 AQUÍ va el evento
+        botonOk.addEventListener("click", () => {
+        reto2(); // ir al siguiente reto
+});
+
+// luego lo pintas
+reto1.appendChild(correcto);
+reto1.appendChild(botonOk);
 
       } else {
         reto1.innerHTML = "";
