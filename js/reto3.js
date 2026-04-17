@@ -111,6 +111,8 @@ mostrarPantallaMaletas();
 activarBotonMaletas();
 
 /*PANTALLA 3 MALETAS*****/ 
+
+
 // ==========================
 // 🧠 CLASE
 // ==========================
@@ -132,7 +134,7 @@ const maletas = [
 ];
 
 // ==========================
-// 🧳 PANTALLA SELECCIÓN
+// 🧳 PANTALLA MALETAS
 // ==========================
 function mostrarSeleccionMaletas() {
   const container = document.getElementById("reto3-container");
@@ -140,10 +142,12 @@ function mostrarSeleccionMaletas() {
   container.innerHTML = `
     <div class="pantalla-maletas">
 
-      <div class="fondo">
+      <!-- IMAGEN -->
+      <figure class="imagen-container">
         <img src="../img/resources/habitacion-maletas.png">
-      </div>
+      </figure>
 
+      <!-- MALETAS -->
       <div class="maletas">
         ${maletas.map(m => `
           <div class="maleta" data-id="${m.id}">
@@ -151,6 +155,12 @@ function mostrarSeleccionMaletas() {
           </div>
         `).join("")}
       </div>
+
+      <!-- TEXTO -->
+      <article class="texto">
+        <p>Solo puedes llevarte una...</p>
+        <p>¿Cuál te ayudará a sobrevivir?</p>
+      </article>
 
     </div>
   `;
@@ -181,20 +191,23 @@ function mostrarDetalleMaleta(maleta) {
   const container = document.getElementById("reto3-container");
 
   container.innerHTML = `
-    <div class="pantalla-detalle">
+    <div class="pantalla-maletas">
 
-      <div class="imagen-container">
+      <!-- IMAGEN -->
+      <figure class="imagen-container">
         <img src="../img/resources/maleta-abierta.png">
-      </div>
+      </figure>
 
-      <div class="objetos-box">
+      <!-- CONTENIDO -->
+      <article class="texto">
         <h3>Contenido:</h3>
         <ul>
           ${maleta.objetos.map(o => `<li>${o}</li>`).join("")}
         </ul>
-      </div>
+      </article>
 
-      <div class="botones">
+      <!-- BOTONES -->
+      <div class="boton-container">
         <button id="elegirBtn">ELEGIR MALETA</button>
         <button id="volverBtn">VOLVER</button>
       </div>
@@ -219,23 +232,39 @@ function mostrarResultado(maleta) {
 
   if (maleta.correcta) {
     container.innerHTML = `
-      <div class="resultado">
-        <h2>✅ HAS SOBREVIVIDO</h2>
-        <p>Buena elección.</p>
+      <div class="pantalla-maletas">
+
+        <figure class="imagen-container">
+          <img src="../img/resources/habitacion-maletas.png">
+        </figure>
+
+        <article class="texto">
+          <h2>✅ HAS SOBREVIVIDO</h2>
+          <p>Buena elección.</p>
+        </article>
+
+        <div class="boton-container">
+          <button onclick="mostrarSeleccionMaletas()">VOLVER A JUGAR</button>
+        </div>
+
       </div>
     `;
   } else {
     container.innerHTML = `
-      <div class="game-over">
+      <div class="pantalla-maletas">
 
-        <div class="imagen-container">
+        <figure class="imagen-container">
           <img src="../img/resources/habitacion-maletas.png">
-          <h2 class="game-over-text">GAME OVER</h2>
+        </figure>
+
+        <article class="texto">
+          <h2 style="color:red;">GAME OVER</h2>
+          <p>No estabas preparado...</p>
+        </article>
+
+        <div class="boton-container">
+          <button onclick="mostrarSeleccionMaletas()">REINTENTAR</button>
         </div>
-
-        <p>No estabas preparado...</p>
-
-        <button onclick="mostrarSeleccionMaletas()">REINTENTAR</button>
 
       </div>
     `;
