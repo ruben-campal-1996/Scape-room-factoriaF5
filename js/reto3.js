@@ -92,8 +92,6 @@ setTimeout(() => {
   mostrarPantallaMaletas();
 }, 300);
 
-
-
 /* ========================= */
 /*  TERCERA PANTALLA        */
 /* ========================= */
@@ -110,8 +108,7 @@ function activarBotonMaletas() {
 mostrarPantallaMaletas();
 activarBotonMaletas();
 
-/*PANTALLA 3 MALETAS*****/ 
-
+/*PANTALLA 3 MALETAS*****/
 
 // ==========================
 // 🧠 CLASE
@@ -128,9 +125,13 @@ class Maleta {
 // 📦 DATOS
 // ==========================
 const maletas = [
-  new Maleta(0, true, ["📕 libro de supervivencia", "🔪 cuchillo", "💧 cantimplora"]),
+  new Maleta(0, true, [
+    "📕 libro de supervivencia",
+    "🔪 cuchillo",
+    "💧 cantimplora",
+  ]),
   new Maleta(1, false, ["🎮 gameboy", "🧴 crema solar", "🧻 toalla"]),
-  new Maleta(2, false, ["🧸 peluche", "🍫 chocolate", "🎧 cascos"])
+  new Maleta(2, false, ["🧸 peluche", "🍫 chocolate", "🎧 cascos"]),
 ];
 
 // ==========================
@@ -142,20 +143,22 @@ function mostrarSeleccionMaletas() {
   container.innerHTML = `
     <div class="pantalla-maletas">
 
-      <!-- IMAGEN -->
-      <figure class="imagen-container">
-        <img src="../img/resources/habitacion-maletas.png">
-      </figure>
+    
 
       <!-- MALETAS -->
-      <div class="maletas">
-        ${maletas.map(m => `
-          <div class="maleta" data-id="${m.id}">
-            <img src="../img/resources/maleta-cerrada.png">
-          </div>
-        `).join("")}
-      </div>
+    <div class="imagen-container zona-mapa">
 
+  <img src="../img/resources/habitacion-maletas.png">
+
+  ${maletas
+    .map(
+      (m) => `
+    <div class="zona-maleta" data-id="${m.id}"></div>
+  `,
+    )
+    .join("")}
+
+</div>
       <!-- TEXTO -->
       <article class="texto">
         <p>Solo puedes llevarte una...</p>
@@ -174,7 +177,7 @@ function mostrarSeleccionMaletas() {
 function activarEventosMaletas() {
   const maletasDOM = document.querySelectorAll(".maleta");
 
-  maletasDOM.forEach(m => {
+  maletasDOM.forEach((m) => {
     m.addEventListener("click", () => {
       const id = m.dataset.id;
       const seleccion = maletas[id];
@@ -202,7 +205,7 @@ function mostrarDetalleMaleta(maleta) {
       <article class="texto">
         <h3>Contenido:</h3>
         <ul>
-          ${maleta.objetos.map(o => `<li>${o}</li>`).join("")}
+          ${maleta.objetos.map((o) => `<li>${o}</li>`).join("")}
         </ul>
       </article>
 
