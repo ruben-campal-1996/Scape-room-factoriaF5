@@ -13,7 +13,7 @@ export function reto1() {
   imgContainer.classList.add("img-container");
 
   const img = document.createElement("img");
-  img.src = "/img/resources/reto1.png";
+  img.src = "../assets/img/resources/reto 1.png";
   imgContainer.appendChild(img);
 
   // 🔹 TEXTO

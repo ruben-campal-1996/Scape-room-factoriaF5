@@ -28,7 +28,7 @@ function iniciarTemporizador() {
 
     actualizarTimer();
 
-    if (tiempo = 0) {
+    if (tiempo <= 0) {
       clearInterval(intervalo);
       tiempo = 0;
 
@@ -63,7 +63,7 @@ export function completarReto() {
 
   localStorage.setItem("estadoJuego", "ganado");
 
-  window.location.href = "final.html";
+  window.location.href = "./final.html";
 }
 
 // ===============================

@@ -89,13 +89,13 @@ p {
 }
 
 .pantalla-reto {
-  background-image: url("/img/resources/codigoPuerta.jpeg");
+  background-image: url("../assets/img/resources/cifrador.jpeg");
   background-size: cover;
   background-position: center;
 }
 
 #reto-1.pantalla-reto {
-  background-image: url("/img/resources/codigoPuerta.jpeg");
+  background-image: url("../assets/img/resources/cifrador.jpeg");
   background-size: cover;
   background-position: center;
   min-height: 100vh;
