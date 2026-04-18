@@ -46,10 +46,10 @@ export function reto1() {
     teclado.classList.add("teclado-img");
 
     const operacion1 = document.createElement("p");
-    operacion1.textContent = "(4 + 6) × (2 + 1)";
+    operacion1.textContent = "(8 - 5) x 4";
 
     const operacion2 = document.createElement("p");
-    operacion2.textContent = "(20 ÷ 4) + (3 × 2)";
+    operacion2.textContent = "(24 ÷ 3) + (4 x 6)";
 
     // 🔹 INPUTS
     const inputsContainer = document.createElement("div");
@@ -75,7 +75,7 @@ export function reto1() {
     comprobar.addEventListener("click", () => {
       const codigo = inputs.map(i => i.value).join("");
 
-      if (codigo === "2750") {
+      if (codigo === "1234") {
         contenedor.innerHTML = "";
 
         const resultadoWrapper = document.createElement("div");
