@@ -5,6 +5,7 @@ export function reto1() {
   contenedor.className = "pantalla-contexto";
 
   // 🔹 IMAGEN
+ 
   const imgContainer = document.createElement("div");
   imgContainer.classList.add("img-container");
 
@@ -26,6 +27,8 @@ export function reto1() {
   const boton = document.createElement("button");
   boton.textContent = "ACERCARSE A LA PUERTA";
   boton.classList.add("btn-rojo");
+
+  
 
   // 🔥 EVENTO PRINCIPAL
   boton.addEventListener("click", () => {
@@ -98,7 +101,7 @@ if (codigo === "2750") {
         contenedor.classList.add("pantalla-reto");
 
         const errorWrapper = document.createElement("div");
-        errorWrapper.classList.add("resultado-container");
+        errorWrapper.classList.add("reto-container");
 
         const incorrecto = document.createElement("h2");
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
@@ -109,7 +112,7 @@ if (codigo === "2750") {
         botonNook.classList.add("btn-rojo");
 
         botonNook.addEventListener("click", () => {
-          reto1(); // 🔁 reinicia
+            boton.click();
         });
 
         errorWrapper.appendChild(incorrecto);
@@ -118,6 +121,8 @@ if (codigo === "2750") {
         contenedor.appendChild(errorWrapper);
       }
     });
+
+
 
     // 🔹 ORDEN FINAL
     wrapper.appendChild(titulo2);
