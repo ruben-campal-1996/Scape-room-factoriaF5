@@ -1,4 +1,4 @@
-const final_bueno = false;
+const estado = localStorage.getItem("estadoJuego");
 
 const main = document.querySelector(".main-container");
 const hero = document.createElement("section");
@@ -47,7 +47,7 @@ function mostrarFinalMalo() {
   hero_container.appendChild(a_return);
 }
 
-if(final_bueno == true) {
+if(estado == "ganado") {
   mostrarFinalBueno();
 } else {
   mostrarFinalMalo();

@@ -1,10 +1,11 @@
 // ===============================
 // CONFIG
 // ===============================
-const DURACION = 300; // segundos
+const DURACION = 600; // segundos
 
 let tiempo = DURACION;
 let intervalo = null;
+let juegoTerminado = false;
 
 // ===============================
 // INICIAR JUEGO (llamar en reto.html)
@@ -15,6 +16,18 @@ export function iniciarJuego() {
 
   iniciarTemporizador();
   actualizarTimer();
+}
+
+function terminarJuego(estado) {
+  if (juegoTerminado) return; // 👈 evita doble ejecución
+
+  juegoTerminado = true;
+
+  if (intervalo) clearInterval(intervalo);
+
+  localStorage.setItem("estadoJuego", estado);
+
+  window.location.href = "../templates/final.html";
 }
 
 // ===============================
@@ -29,17 +42,18 @@ function iniciarTemporizador() {
     actualizarTimer();
 
     if (tiempo <= 0) {
-      clearInterval(intervalo);
       tiempo = 0;
-
-      // guardar derrota
-      localStorage.setItem("estadoJuego", "perdido");
-
-      // redirigir
-      window.location.href = "final.html";
+      terminarJuego("perdido");
     }
 
   }, 1000);
+}
+
+// ===============================
+// CUANDO EL USUARIO GANA (llamar desde reto1.js)
+// ===============================
+export function completarReto() {
+  terminarJuego("ganado");
 }
 
 // ===============================
@@ -55,16 +69,6 @@ function actualizarTimer() {
   el.textContent = `${min}:${seg.toString().padStart(2, "0")}`;
 }
 
-// ===============================
-// CUANDO EL USUARIO GANA (llamar desde reto1.js)
-// ===============================
-export function completarReto() {
-  if (intervalo) clearInterval(intervalo);
-
-  localStorage.setItem("estadoJuego", "ganado");
-
-  window.location.href = "./final.html";
-}
 
 // ===============================
 // FINAL.HTML → PINTAR RESULTADO
@@ -73,7 +77,9 @@ export function pintarFinal() {
   const estado = localStorage.getItem("estadoJuego");
   const container = document.getElementById("resultado");
 
+  
   if (!container) return;
+  container.innerHTML = "";
 
   if (estado === "ganado") {
     container.innerHTML = `

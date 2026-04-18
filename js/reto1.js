@@ -3,7 +3,7 @@ import { iniciarJuego, completarReto } from "./temporizador.js";
 
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
-
+  iniciarJuego();
   contenedor.innerHTML = "";
   contenedor.className = "pantalla-contexto";
 
@@ -32,7 +32,7 @@ export function reto1() {
   boton.classList.add("btn-rojo");
 
   
-iniciarJuego();
+
   // 🔥 EVENTO PRINCIPAL
   boton.addEventListener("click", () => {
     contenedor.innerHTML = "";
