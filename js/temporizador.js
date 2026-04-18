@@ -1,7 +1,7 @@
 // ===============================
 // CONFIG
 // ===============================
-const DURACION = 600; // segundos
+const DURACION = 60; // segundos
 
 let tiempo = DURACION;
 let intervalo = null;
@@ -73,11 +73,15 @@ function actualizarTimer() {
 // ===============================
 // FINAL.HTML → PINTAR RESULTADO
 // ===============================
+
+export function abandonarJuego() {
+  terminarJuego("perdido");
+}
+
 export function pintarFinal() {
   const estado = localStorage.getItem("estadoJuego");
   const container = document.getElementById("resultado");
 
-  
   if (!container) return;
   container.innerHTML = "";
 

@@ -105,7 +105,6 @@ p {
 .teclado-img {
   width: 220px;
   height: 220px;
-  background-image: url("/img/resources/codigoPuerta.jpeg");
   background-size: cover;
   background-position: center;
   background: transparent;
@@ -296,4 +295,8 @@ p {
   z-index: 999;
   padding: 8px 12px;
   border-radius: 10px;
+}
+
+.btn-salir {
+  
 }

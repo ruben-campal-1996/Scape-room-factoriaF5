@@ -1,14 +1,14 @@
-import { iniciarJuego, completarReto } from "./temporizador.js";
-
+import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
+
   iniciarJuego();
+
   contenedor.innerHTML = "";
   contenedor.className = "pantalla-contexto";
 
   // 🔹 IMAGEN
- 
   const imgContainer = document.createElement("div");
   imgContainer.classList.add("img-container");
 
@@ -30,8 +30,6 @@ export function reto1() {
   const boton = document.createElement("button");
   boton.textContent = "ACERCARSE A LA PUERTA";
   boton.classList.add("btn-rojo");
-
-  
 
   // 🔥 EVENTO PRINCIPAL
   boton.addEventListener("click", () => {
@@ -68,38 +66,39 @@ export function reto1() {
       inputsContainer.appendChild(input);
     }
 
-    // 🔹 BOTÓN
+    // 🔹 BOTÓN COMPROBAR
     const comprobar = document.createElement("button");
     comprobar.textContent = "INTRODUCIR CODIGO";
     comprobar.classList.add("btn-rojo");
 
     // 🔥 VALIDACIÓN
     comprobar.addEventListener("click", () => {
-      const codigo = inputs.map((i) => i.value).join("");
+      const codigo = inputs.map(i => i.value).join("");
 
-if (codigo === "2750") {
-  contenedor.innerHTML = "";
+      if (codigo === "2750") {
+        contenedor.innerHTML = "";
 
-  const resultadoWrapper = document.createElement("div");
-  resultadoWrapper.classList.add("resultado-container");
+        const resultadoWrapper = document.createElement("div");
+        resultadoWrapper.classList.add("resultado-container");
 
-  const correcto = document.createElement("h2");
-  correcto.textContent = "¡CÓDIGO CORRECTO!";
-  correcto.classList.add("correcto-texto");
+        const correcto = document.createElement("h2");
+        correcto.textContent = "¡CÓDIGO CORRECTO!";
+        correcto.classList.add("correcto-texto");
 
-  const botonOk = document.createElement("button");
-  botonOk.textContent = "SIGUIENTE";
-  botonOk.classList.add("btn-verde");
+        const botonOk = document.createElement("button");
+        botonOk.textContent = "SIGUIENTE";
+        botonOk.classList.add("btn-verde");
 
-  botonOk.addEventListener("click", () => {
-    completarReto();
-  });
+        botonOk.addEventListener("click", () => {
+          completarReto();
+        });
 
-  resultadoWrapper.appendChild(correcto);
-  resultadoWrapper.appendChild(botonOk);
+        resultadoWrapper.appendChild(correcto);
+        resultadoWrapper.appendChild(botonOk);
 
-  contenedor.appendChild(resultadoWrapper);
-} else {
+        contenedor.appendChild(resultadoWrapper);
+
+      } else {
         contenedor.innerHTML = "";
         contenedor.classList.add("pantalla-reto");
 
@@ -110,22 +109,22 @@ if (codigo === "2750") {
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
         incorrecto.classList.add("error-texto");
 
-        const botonNook = document.createElement("button");
-        botonNook.textContent = "REINTENTAR";
-        botonNook.classList.add("btn-rojo");
+        const botonReintentar = document.createElement("button");
+        botonReintentar.textContent = "REINTENTAR";
+        botonReintentar.classList.add("btn-rojo");
 
-        botonNook.addEventListener("click", () => {
-            boton.click();
+        botonReintentar.addEventListener("click", () => {
+          boton.click();
         });
 
         errorWrapper.appendChild(incorrecto);
-        errorWrapper.appendChild(botonNook);
+        errorWrapper.appendChild(botonReintentar);
 
         contenedor.appendChild(errorWrapper);
       }
     });
 
-    // 🔹 ORDEN FINAL
+    // 🔹 MONTAJE DEL RETO
     wrapper.appendChild(titulo2);
     wrapper.appendChild(teclado);
     wrapper.appendChild(operacion1);
@@ -136,12 +135,11 @@ if (codigo === "2750") {
     contenedor.appendChild(wrapper);
   });
 
-  // 🔹 MONTAJE INICIAL
+  // 🔹 PANTALLA INICIAL
   contenedor.appendChild(imgContainer);
-  contenedor.appendChild(textoContainer);
-
   textoContainer.appendChild(titulo);
   textoContainer.appendChild(texto);
   textoContainer.appendChild(boton);
-  
+
+  contenedor.appendChild(textoContainer);
 }
