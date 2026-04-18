@@ -1,3 +1,12 @@
+import { iniciarTemporizador } from "./temporizador.js"; /*Con esto llammamos al temporizador */
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  iniciarTemporizador(); // 🔥 SOLO UNA VEZ
+  mostrarSeleccionMaletas();
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
   mostrarPantalla();
 });
@@ -29,7 +38,7 @@ function mostrarPantalla() {
 
      
       <figure class="imagen-container">
-        <img src="../img/resources/victoria.png" alt="Victoria">
+        <img src="../assets/img/resources/victoria.png" alt="Victoria">
       </figure>
 
     </div>
@@ -78,7 +87,7 @@ function mostrarPantallaMaletas() {
 
   
        <figure class="imagen-container">
-        <img src="../img/resources/habitacion-maletas.png" alt="Maletas">
+        <img src="../assets/img/resources/habitacion-maletas.png" alt="Maletas">
       </figure>
 
     
@@ -148,7 +157,7 @@ function mostrarSeleccionMaletas() {
       <!-- MALETAS -->
     <div class="imagen-container zona-mapa">
 
-  <img src="../img/resources/habitacion-maletas.png">
+  <img src="../assets/img/resources/habitacion-maletas.png">
 
   ${maletas
     .map(
@@ -198,7 +207,7 @@ function mostrarDetalleMaleta(maleta) {
 
       <!-- IMAGEN -->
       <figure class="imagen-container">
-        <img src="../img/resources/maleta-abierta.png">
+        <img src="../assets/img/resources/maleta-abierta.png">
       </figure>
 
       <!-- CONTENIDO -->
@@ -238,7 +247,7 @@ function mostrarResultado(maleta) {
       <div class="pantalla-maletas">
 
         <figure class="imagen-container">
-          <img src="../img/resources/habitacion-maletas.png">
+          <img src="../assets/img/resources/habitacion-maletas.png">
         </figure>
 
         <article class="texto">
@@ -257,7 +266,7 @@ function mostrarResultado(maleta) {
       <div class="pantalla-maletas">
 
         <figure class="imagen-container">
-          <img src="../img/resources/habitacion-maletas.png">
+          <img src="../assets/img/resources/habitacion-maletas.png">
         </figure>
 
         <article class="texto">

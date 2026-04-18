@@ -226,3 +226,16 @@ footer {
     gap: var(--space-lg);
   }
 }
+
+#timer {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-primary);
+   background: rgba(0,0,0,0.7);
+  z-index: 999;
+  padding: 8px 12px;
+  border-radius: 10px;
+}
