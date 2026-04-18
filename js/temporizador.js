@@ -1,4 +1,4 @@
-let intervalo = null;
+let intervalo = null;  /*para 
 
 export function iniciarTemporizador() {
   if (intervalo) return;   /*el temporizador no se duplica*/
