@@ -1,3 +1,6 @@
+import { iniciarJuego, completarReto } from "./temporizador.js";
+
+
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
 
@@ -29,7 +32,7 @@ export function reto1() {
   boton.classList.add("btn-rojo");
 
   
-
+iniciarJuego();
   // 🔥 EVENTO PRINCIPAL
   boton.addEventListener("click", () => {
     contenedor.innerHTML = "";
@@ -89,7 +92,7 @@ if (codigo === "2750") {
   botonOk.classList.add("btn-verde");
 
   botonOk.addEventListener("click", () => {
-    reto2();
+    completarReto();
   });
 
   resultadoWrapper.appendChild(correcto);
@@ -122,8 +125,6 @@ if (codigo === "2750") {
       }
     });
 
-a
-
     // 🔹 ORDEN FINAL
     wrapper.appendChild(titulo2);
     wrapper.appendChild(teclado);
@@ -142,4 +143,5 @@ a
   textoContainer.appendChild(titulo);
   textoContainer.appendChild(texto);
   textoContainer.appendChild(boton);
+  
 }
