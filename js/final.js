@@ -38,8 +38,9 @@ function mostrarFinalMalo() {
   const img = document.createElement("img");
   img.src = "../assets/img/resources/game-over.png";
   img_container.appendChild(img);
-    const contentContainer = document.createElement("div");
+  const contentContainer = document.createElement("div");
   contentContainer.classList.add("content-container");
+  hero.appendChild(contentContainer)
   const h1 = document.createElement("h1");
   h1.textContent = "¡HAS PERDIDO!";
   contentContainer.appendChild(h1);
