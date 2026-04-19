@@ -304,8 +304,8 @@ footer {
     margin-top: 6rem;
   }
 
-  .img-container {
-    flex: 1;
+  .img-container  {
+    
     justify-content: center;
     align-items: center;
   }
