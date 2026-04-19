@@ -3,6 +3,16 @@ import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
 
+
+     // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
+document.addEventListener("DOMContentLoaded", () => {
+  const btnAbandonar = document.getElementById("abandonar");
+
+  if (btnAbandonar) {
+    btnAbandonar.addEventListener("click", abandonarJuego);
+  }
+});     // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
+
   iniciarJuego();
 
   contenedor.innerHTML = "";
@@ -39,7 +49,7 @@ export function reto1() {
     const wrapper = document.createElement("div");
     wrapper.classList.add("reto-container");
 
-    const titulo2 = document.createElement("h2");
+    const titulo2 = document.createElement("h1");
     titulo2.textContent = "RESUELVE PARA CONTINUAR:";
 
     const teclado = document.createElement("div");
@@ -81,7 +91,7 @@ export function reto1() {
         const resultadoWrapper = document.createElement("div");
         resultadoWrapper.classList.add("resultado-container");
 
-        const correcto = document.createElement("h2");
+        const correcto = document.createElement("h1");
         correcto.textContent = "¡CÓDIGO CORRECTO!";
         correcto.classList.add("correcto-texto");
 
@@ -103,9 +113,9 @@ export function reto1() {
         contenedor.classList.add("pantalla-reto");
 
         const errorWrapper = document.createElement("div");
-        errorWrapper.classList.add("reto-container");
+        errorWrapper.classList.add("resultado-container");  /*lo corregí para ahorrar lineas de codigo*/
 
-        const incorrecto = document.createElement("h2");
+        const incorrecto = document.createElement("h1"); /* todos son h1*/
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
         incorrecto.classList.add("error-texto");
 
@@ -143,3 +153,4 @@ export function reto1() {
 
   contenedor.appendChild(textoContainer);
 }
+
