@@ -106,6 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const correcto = document.createElement("h1");
         correcto.textContent = "¡CÓDIGO CORRECTO!";
         correcto.classList.add("correcto-texto");
+        const sound_open = document.getElementById("open-sound");
+        sound_open.play();
 
         const botonOk = document.createElement("button");
         botonOk.textContent = "SIGUIENTE";
