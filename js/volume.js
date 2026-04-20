@@ -3,10 +3,8 @@ export function volumen() {
   const volumeControl = document.getElementById('volume-control');
   const audioToggle = document.getElementById('audio-toggle');
 
-  // Ajustar volumen inicial
   audio.volume = volumeControl.value;
 
-  // Evento para cambiar el volumen
   volumeControl.addEventListener('input', (e) => {
     audio.volume = e.target.value;
    
@@ -28,4 +26,4 @@ export function volumen() {
       audioToggle.innerText = "🔇";
     }
   });
-}
+}              
