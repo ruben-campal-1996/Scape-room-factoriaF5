@@ -255,6 +255,46 @@ main {
   transition: all 0.2s ease;
 }
 
+.audio-menu {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.audio-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: white;
+  outline: none;
+}
+
+.volume-slider-container {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.audio-menu:hover .volume-slider-container {
+  width: 120px;
+  margin-left: 10px;
+}
+
+#volume-control {
+  cursor: pointer;
+  width: 100px;
+}
+
 .btn-start:hover {
   background-color: var(--color-hover);
   transform: scale(1.05);
