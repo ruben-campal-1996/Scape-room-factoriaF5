@@ -67,10 +67,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const inputs = [];
 
+    const beep = document.getElementById("beep-sound");
+
     for (let i = 0; i < 4; i++) {
       const input = document.createElement("input");
       input.maxLength = 1;
       input.classList.add("codigo-input");
+
+      // Evento para el sonido de beep
+      input.addEventListener("input", (e) => {
+        // Solo suena si el input no está vacío (por si borran)
+        if (e.target.value !== "") {
+          // Reiniciamos el audio por si el usuario escribe muy rápido
+          beep.currentTime = 0; 
+          beep.play();
+        }
+      });
 
       inputs.push(input);
       inputsContainer.appendChild(input);
