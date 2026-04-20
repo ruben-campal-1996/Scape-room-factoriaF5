@@ -41,11 +41,11 @@
 }
 
 .texto-container p {
-  background-color: rgba(179, 179, 179, 0.7);
+  /*background-color: rgba(179, 179, 179, 0.7);*/
   /*le da un 70% de transperencia*/
-  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
   padding: 1rem;
-
 }
 
 .img-container img {
