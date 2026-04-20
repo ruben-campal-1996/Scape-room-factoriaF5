@@ -13,7 +13,7 @@ const creator = [
   },
   {
     name: "Ruben Campal López",
-    img: "https://avatars.githubusercontent.com/u/195755063?s=48&v=4",
+    img: "https://avatars.githubusercontent.com/u/195755063?s=400&u=2dee0f704dfe8fe31c5dabe0d8c6689bcdc5d322&v=4",
     url: "https://github.com/ruben-campal-1996",
     linkedin: "https://www.linkedin.com/in/rubén-campal-lópez-10036627b/",
   },
