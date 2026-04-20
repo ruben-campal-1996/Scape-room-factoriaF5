@@ -1,56 +1,103 @@
-let intervalo = null;  /*para 
+// ===============================
+// CONFIG
+// ===============================
+const DURACION = 120; // segundos
 
-export function iniciarTemporizador() {
-  if (intervalo) return;   /*el temporizador no se duplica*/
+let tiempo = DURACION;
+let intervalo = null;
+let juegoTerminado = false;
 
-  let tiempoGuardado = localStorage.getItem("tiempo");
+// ===============================
+// INICIAR JUEGO (llamar en reto.html)
+// ===============================
+export function iniciarJuego() {
+  // estado inicial
+  localStorage.setItem("estadoJuego", "jugando");
 
-  let tiempo = tiempoGuardado ? parseInt(tiempoGuardado) : 300;
+  iniciarTemporizador();
+  actualizarTimer();
+}
+
+function terminarJuego(estado) {
+  if (juegoTerminado) return; // 👈 evita doble ejecución
+
+  juegoTerminado = true;
+
+  if (intervalo) clearInterval(intervalo);
+
+  localStorage.setItem("estadoJuego", estado);
+
+  window.location.href = "../templates/final.html";
+}
+
+// ===============================
+// TEMPORIZADOR
+// ===============================
+function iniciarTemporizador() {
+  if (intervalo) return;
 
   intervalo = setInterval(() => {
     tiempo--;
 
-    localStorage.setItem("tiempo", tiempo);
-
-    actualizarTimer(tiempo);
+    actualizarTimer();
 
     if (tiempo <= 0) {
-      clearInterval(intervalo);
-      finDelJuego();
+      tiempo = 0;
+      terminarJuego("perdido");
     }
 
   }, 1000);
 }
 
-function actualizarTimer(tiempo) {
-  const timer = document.getElementById("timer");
-
-  if (timer) {
-    const min = Math.floor(tiempo / 60);
-    const seg = tiempo % 60;
-
-    timer.textContent = `${min}:${seg.toString().padStart(2, "0")}`;
-  }
+// ===============================
+// CUANDO EL USUARIO GANA (llamar desde reto1.js)
+// ===============================
+export function completarReto() {
+  terminarJuego("ganado");
 }
 
-function finDelJuego() {
-  localStorage.removeItem("tiempo");
+// ===============================
+// ACTUALIZAR UI TIMER
+// ===============================
+function actualizarTimer() {
+  const el = document.getElementById("timer");
+  if (!el) return;
 
-  const container = document.getElementById("reto3-container");
+  const min = Math.floor(tiempo / 60);
+  const seg = tiempo % 60;
 
-  if (container) {
+  el.textContent = `${min}:${seg.toString().padStart(2, "0")}`;
+}
+
+
+// ===============================
+// FINAL.HTML → PINTAR RESULTADO
+// ===============================
+
+export function abandonarJuego() {
+  terminarJuego("perdido");
+}
+
+export function pintarFinal() {
+  const estado = localStorage.getItem("estadoJuego");
+  const container = document.getElementById("resultado");
+
+  if (!container) return;
+  container.innerHTML = "";
+
+  if (estado === "ganado") {
     container.innerHTML = `
-      <div class="pantalla-maletas">
-        <h2 style="color:red;">⏰ TIEMPO AGOTADO</h2>
-        <p>No has logrado escapar...</p>
-        <button onclick="reiniciarJuego()">REINTENTAR</button>
+      <div>
+        <h2>🎉 VICTORIA</h2>
+        <p>Has completado el reto a tiempo</p>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div>
+        <h2 style="color:red;">⏱️ DERROTA</h2>
+        <p>Se acabó el tiempo</p>
       </div>
     `;
   }
-}
-
-// 🔥 FUNCIÓN GLOBAL
-export function reiniciarJuego() {
-  localStorage.removeItem("tiempo");
-  location.reload();
 }
