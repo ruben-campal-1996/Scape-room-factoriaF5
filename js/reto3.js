@@ -1,4 +1,4 @@
-import { iniciarTemporizador } from "./temporizador.js"; /*Con esto llammamos al temporizador */
+import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
