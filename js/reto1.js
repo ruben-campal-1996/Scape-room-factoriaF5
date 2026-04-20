@@ -132,6 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const incorrecto = document.createElement("h1"); /* todos son h1*/
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
         incorrecto.classList.add("error-texto");
+        const wrong_key = document.getElementById("wrong-sound");
+        wrong_key.play();
 
         const botonReintentar = document.createElement("button");
         botonReintentar.textContent = "REINTENTAR";
