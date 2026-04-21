@@ -1,20 +1,12 @@
-import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
+export function iniciarReto3() {
+  const contenedor = document.getElementById("reto-1");
 
 
-document.addEventListener("DOMContentLoaded", () => {
-  iniciarTemporizador(); // 🔥 SOLO UNA VEZ
-  mostrarSeleccionMaletas();
-});
-
-
-document.addEventListener("DOMContentLoaded", () => {
-  mostrarPantalla();
-});
 
 function mostrarPantalla() {
   const container = document.getElementById("reto3-container");
 
-  container.innerHTML = `
+  contenedor.innerHTML = `
     <div class="reto3-content">
 
       <!-- LADO IZQUIERDO -->
@@ -44,7 +36,7 @@ function mostrarPantalla() {
     </div>
   `;
 
-  activarBoton();
+ mostrarPantalla();
 }
 
 /* ========================= */
@@ -97,9 +89,7 @@ function mostrarPantallaMaletas() {
 
   activarBotonMaletas();
 }
-setTimeout(() => {
-  mostrarPantallaMaletas();
-}, 300);
+
 
 /* ========================= */
 /*  TERCERA PANTALLA        */
@@ -114,8 +104,6 @@ function activarBotonMaletas() {
   });
 }
 
-mostrarPantallaMaletas();
-activarBotonMaletas();
 
 /*PANTALLA 3 MALETAS*****/
 
@@ -184,7 +172,7 @@ function mostrarSeleccionMaletas() {
 // ⚙️ EVENTOS
 // ==========================
 function activarEventosMaletas() {
-  const maletasDOM = document.querySelectorAll(".maleta");
+ const maletasDOM = document.querySelectorAll(".zona-maleta");
 
   maletasDOM.forEach((m) => {
     m.addEventListener("click", () => {
@@ -282,10 +270,4 @@ function mostrarResultado(maleta) {
     `;
   }
 }
-
-// ==========================
-// 🚀 INICIO
-// ==========================
-document.addEventListener("DOMContentLoaded", () => {
-  mostrarSeleccionMaletas();
-});
+}

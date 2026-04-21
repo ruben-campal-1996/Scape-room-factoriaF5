@@ -1,5 +1,6 @@
 import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
-
+import { iniciarReto3 } from "./reto3.js"; /* PARA ENLAZAR LOS RETOS ENTRE ELLOS DEBERIAMOS AQUI AÑADIR EL RETO 2 EN CUANTO ESTE*/
+ 
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
 
@@ -99,10 +100,15 @@ document.addEventListener("DOMContentLoaded", () => {
         botonOk.textContent = "SIGUIENTE";
         botonOk.classList.add("btn-verde");
 
-        botonOk.addEventListener("click", () => {
+      /*   botonOk.addEventListener("click", () => {
           completarReto();
-        });
+        });          ESTO LO CAMBIAMO POR EL DE ACONTINUACION PORQUE LLEVAR AL FINAL Y QUEREMOS LLEVARLO AL RETO3 */
 
+botonOk.addEventListener("click", () => {
+  contenedor.innerHTML = '<div id="reto3-container"></div>'; 
+  iniciarReto3();
+});
+        
         resultadoWrapper.appendChild(correcto);
         resultadoWrapper.appendChild(botonOk);
 
