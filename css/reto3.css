@@ -3,7 +3,7 @@
 /*  RETO 3 - PANTALLA */
 /* ========================= */
 
-#reto3-container{
+#reto3-content{
   padding: var(--space-xl);
   color: var(--color-text-main);
 }

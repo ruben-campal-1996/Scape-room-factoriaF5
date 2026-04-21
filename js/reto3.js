@@ -3,8 +3,6 @@ export function iniciarReto3() {
 
 
 
-function mostrarPantalla() {
-  const container = document.getElementById("reto3-container");
 
   contenedor.innerHTML = `
     <div class="reto3-content">
@@ -35,8 +33,7 @@ function mostrarPantalla() {
 
     </div>
   `;
-
- mostrarPantalla();
+  mostrarPantalla();
 }
 
 /* ========================= */
@@ -269,5 +266,4 @@ function mostrarResultado(maleta) {
       </div>
     `;
   }
-}
 }
