@@ -16,11 +16,10 @@ function crearSection(id,clase) {
     nuevoSection.classList.add(clase)
     return nuevoSection
 }
-function crearImagen(src,alt, clase="") {
+function crearImagen(src,alt="", clase="") {
     const nuevaImg = document.createElement("img")
     nuevaImg.src = src
-    nuevaImg.alt = alt
-
+    if (alt) {nuevaImg.alt = alt}
     if (clase) {nuevaImg.classList.add(clase)}
     return nuevaImg
 }
@@ -37,15 +36,9 @@ function crearTexto(tag,texto) {
     return nuevoTexto
 }
 
-// ---FUNCION PARA CAMBIAR ENTRE PANTALLAS DOM---
-function cambiarPantalla(pantallaFn) {
-    const main= document.querySelector("main")
-    main.innerHTML =""
-    pantallaFn(main)
-}
 // ---INICIO RETO 2---
-function reto2Contexto() {
-    const main = document.querySelector("main")
+export function reto2Contexto() {
+    const main= document.querySelector("main")
 
     const hero = crearSection("hero", "hero-section")
     const divGeneral = crearDiv("general-container")
@@ -73,7 +66,10 @@ function reto2Contexto() {
     divImg.append(imgPuerta)
     textContainer.append(h1, pContainer, boton)
 
-    boton.addEventListener("click", () => cambiarPantalla(reto2Prueba))
+    boton.addEventListener("click", () => {
+        main.innerHTML = ""
+        reto2Prueba()
+    })
 }
 
 // PRUEBA RETO 2
@@ -86,10 +82,41 @@ function reto2Prueba() {
     const divImgItems = crearDiv("img-items-container")
     const textContainer = crearDiv("textContainer")
     const imgMesa = crearImagen("../assets/img/resources/mesa-vacia.png", "Imagen de una mesa", "img-mesa")
-    const imgMachete = crearImagen("../assets/img/resources/machete.png", "Imagen de un machete", "img-item") 
-    const imgJeringuilla = crearImagen("../assets/img/resources/jeringuilla.png", "Imagen de una jeringuilla", "img-item") 
-    const imgLupa = crearImagen("../assets/img/resources/lupa.png", "Imagen de una lupa", "img-item") 
-    const imgProbeta = crearImagen("../assets/img/resources/probeta.png", "Imagen de una probeta", "img-item")
+    const imgObjetos = [
+        {
+            type: "machete",
+            descripcion: "¿Un machete? Pero si esto es un laboratorio..",
+            imagen: "../assets/img/resources/machete.png",
+            mensaje: "Coges el machete, y te preparas para defender...",
+            correcto: true
+        },
+        {
+            type: "lupa",
+            descripcion: "una lupa ensangrentada y sucia",
+            imagen: "../assets/img/resources/lupa.png",
+            mensaje: "... Yo si que te voy a dar con la lupa. Escoge otra cosa.",
+            correcto: false
+        },
+        {
+            type: "jeringuilla",
+            descripcion: "Una jeringuilla usada",
+            imagen: "../assets/img/resources/jeringuilla.png",
+            mensaje: "¿A quien le gusta un jeringazo? ¡OUCH! Pero.. escoge otra cosa.",
+            correcto: false
+        },
+        {
+            type: "probeta",
+            descripcion: "Una probeta, aún contiene algo de un líquido desconocido..",
+            imagen: "../assets/img/resources/probeta.png",
+            mensaje: "Excelente boomerang (de 1 solo uso)... Escoge otra cosa.",
+            correcto: false
+        }
+    ]
+    imgObjetos.forEach((objeto) => {
+        const imagen = crearImagen(objeto.imagen, objeto.descripcion, "item-"+objeto.type)
+        divImgItems.append(imagen)
+    })
+
     const h1 = crearTexto("h1","ESCOGE OBJETO...")
     const boton = crearBoton("Seleccionar", "btn-reto2")
 
@@ -97,7 +124,5 @@ function reto2Prueba() {
     hero.append(divGeneral)
     divGeneral.append(divImg, textContainer)
     divImg.append(imgMesa, divImgItems)
-    divImgItems.append(imgJeringuilla, imgLupa, imgMachete, imgProbeta)
     textContainer.append(h1, boton)
 }
-reto2Contexto() 
