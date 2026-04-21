@@ -94,7 +94,7 @@ function reto2Prueba() {
     const boton = crearBoton("Seleccionar", "btn-reto2")
 
     main.append(hero)
-    hero.append(divGeneral, textContainer)
+    hero.append(divGeneral)
     divGeneral.append(divImg, textContainer)
     divImg.append(imgMesa, divImgItems)
     divImgItems.append(imgJeringuilla, imgLupa, imgMachete, imgProbeta)
