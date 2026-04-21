@@ -9,3 +9,11 @@ abrir.addEventListener("click", () => {
 cerrar.addEventListener("click", () => {
   nav.classList.remove("visible");
 });
+
+import { reto1 } from "./reto1.js";
+
+reto1();
+
+
+
+
