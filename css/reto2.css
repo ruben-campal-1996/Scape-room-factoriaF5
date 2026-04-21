@@ -90,7 +90,17 @@ gap: 1rem;
     text-align: center;
   }
 
-  /* .btn-start-r2 {
-  
-  } */
+  .item {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.item:hover {
+  transform: scale(1.1);
+}
+
+.seleccionado {
+  transform: scale(1.2);
+  outline: 3px solid lime;
+}
 }

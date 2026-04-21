@@ -112,8 +112,22 @@ function reto2Prueba() {
             correcto: false
         }
     ]
+// ---LÓGICA E IMPLEMENTACIÓN DE IMAGENES---
+    let objetoSeleccionado = null;
+    let seleccionBloqueada = false;
+
     imgObjetos.forEach((objeto) => {
-        const imagen = crearImagen(objeto.imagen, objeto.descripcion, "item-"+objeto.type)
+        const imagen = crearImagen(objeto.imagen, objeto.descripcion, "item")
+        imagen.classList.add(objeto.type)
+
+        imagen.addEventListener("click", () => {
+            if (seleccionBloqueada) return;
+
+            const todas = document.querySelectorAll(".item")
+            todas.forEach(img => img.classList.remove("seleccionado"))
+            imagen.classList.add("seleccionado")
+            objetoSeleccionado = objeto;
+        })
         divImgItems.append(imagen)
     })
 
@@ -125,4 +139,6 @@ function reto2Prueba() {
     divGeneral.append(divImg, textContainer)
     divImg.append(imgMesa, divImgItems)
     textContainer.append(h1, boton)
+
+
 }
