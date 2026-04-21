@@ -180,7 +180,43 @@
    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }*/
 
+/* Carrusel*/
 
+/* 🔹 CONTENEDOR GENERAL */
+.codigo-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* 🔹 CADA DÍGITO (columna) */
+.digit-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 🔹 NÚMERO (pantalla) */
+.digit-display {
+  width: 70px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2rem;
+  font-weight: bold;
+
+  background: black;
+  color: #00ff00;
+
+  border-radius: 1px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+
+  outline: none;
+}
 
 /* 🔹 EFECTO CUANDO TIENE FOCO */
 .digit-display:focus {
