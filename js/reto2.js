@@ -81,66 +81,23 @@ function reto2Prueba() {
     const main = document.querySelector("main")
 
     const hero = crearSection("hero", "hero-section")
-    const divImg = crearDiv("general-container")
-    const imgMesa = crearImagen("../assets/img/resources/mesa-vacia.png")
-    const img
+    const divGeneral = crearDiv("general-container")
+    const divImg = crearDiv("img-container")
+    const divImgItems = crearDiv("img-items-container")
+    const textContainer = crearDiv("textContainer")
+    const imgMesa = crearImagen("../assets/img/resources/mesa-vacia.png", "Imagen de una mesa", "img-mesa")
+    const imgMachete = crearImagen("../assets/img/resources/machete.png", "Imagen de un machete", "img-item") 
+    const imgJeringuilla = crearImagen("../assets/img/resources/jeringuilla.png", "Imagen de una jeringuilla", "img-item") 
+    const imgLupa = crearImagen("../assets/img/resources/lupa.png", "Imagen de una lupa", "img-item") 
+    const imgProbeta = crearImagen("../assets/img/resources/probeta.png", "Imagen de una probeta", "img-item")
+    const h1 = crearTexto("h1","ESCOGE OBJETO...")
+    const boton = crearBoton("Seleccionar", "btn-reto2")
+
+    main.append(hero)
+    hero.append(divGeneral, textContainer)
+    divGeneral.append(divImg, textContainer)
+    divImg.append(imgMesa, divImgItems)
+    divImgItems.append(imgJeringuilla, imgLupa, imgMachete, imgProbeta)
+    textContainer.append(h1, boton)
 }
-
-
-/* function crearBoton() {
-    const nuevoBoton = document.createElement("button")
-
-} */
-
-/* function escena1Reto2(){
-    const main = document.querySelector("main")
-    
-    const nuevaSection = document.createElement("section")
-    const divGeneral = document.createElement("div")
-    const contentContainer = document.createElement("div")
-    const imgContainer = document.createElement("div")
-    const img = document.createElement("img")
-    const h1 = document.createElement("h1")
-    const textContainer = document.createElement("div")
-    const textos = [
-        "Te vas a abrir paso a traves de la puerta, pero escuchas algo...",
-        "¡AGUANTA LA PUERTA!",
-    "Son muchos, y no podrás resistir eternamente... pero recuerdas que detrás tuyo había una mesa.",
-    "¿Que deberías coger para sobrevivir?"
-]
-const boton = document.createElement("button")
-
-
-nuevaSection.id = "reto2"
-divGeneral.classList.add("general-container")
-contentContainer.classList.add("content-container")
-imgContainer.classList.add("img-container")
-textContainer.classList.add("text-container")
-h1.textContent="¡HAS DESCRIFADO LA CONTRASEÑA!"
-boton.classList.add("btn-start-r2")
-boton.textContent="Escoger objeto"
-
-textos.forEach(texto => {   //Introducir los párrafos dentro del div contenedor
-    const p = document.createElement("p")
-    p.textContent = texto
-    textContainer.appendChild(p) 
-})
-
-img.src="/assets/img/resources/reto-2-1.png"
-img.alt="zombies intentando entrar por una puerta"
-
-main.appendChild(nuevaSection)
-nuevaSection.appendChild(divGeneral)
-divGeneral.appendChild(imgContainer)
-divGeneral.appendChild(contentContainer)
-contentContainer.appendChild(h1)
-contentContainer.appendChild(textContainer)
-imgContainer.appendChild(img)
-contentContainer.appendChild(boton)
-
-boton.addEventListener("click", () => {
-    limpiarPantalla()
-})
-}
-*/
 reto2Contexto() 
