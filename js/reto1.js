@@ -1,3 +1,4 @@
+//import { createElement } from "react";
 import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 
 export function reto1() {
@@ -62,19 +63,91 @@ document.addEventListener("DOMContentLoaded", () => {
     operacion2.textContent = "(24 ÷ 3) + (4 x 6)";
 
     // 🔹 INPUTS
-    const inputsContainer = document.createElement("div");
-    inputsContainer.classList.add("codigo-container");
+    // const inputsContainer = document.createElement("div");
+    // inputsContainer.classList.add("codigo-container");
 
-    const inputs = [];
+    // const inputs = [];
 
-    for (let i = 0; i < 4; i++) {
-      const input = document.createElement("input");
-      input.maxLength = 1;
-      input.classList.add("codigo-input");
+    // for (let i = 0; i < 4; i++) {
+    //   const input = document.createElement("input");
+    //   input.maxLength = 1;
+    //   input.classList.add("codigo-input");
 
-      inputs.push(input);
-      inputsContainer.appendChild(input);
+    //   inputs.push(input);
+    //   inputsContainer.appendChild(input);
+    // }
+
+    // Inputs carrusel 
+
+const inputs = [];
+const displays = [];
+
+const inputsContainer = document.createElement("div");
+inputsContainer.classList.add("codigo-container");
+
+for (let i = 0; i < 4; i++) {
+  const cont = document.createElement("div");
+  cont.classList.add("digit-container");
+
+  const up = document.createElement("button");
+  up.classList.add("btn-flecha");
+  up.textContent = "▲";
+
+  const display = document.createElement("div");
+  display.classList.add("digit-display");
+  display.textContent = "0";
+  display.tabIndex = 0;
+
+  const down = document.createElement("button");
+  down.classList.add("btn-flecha");
+  down.textContent = "▼";
+
+  let valor = 0;
+
+  // 🔼 Sube
+  up.addEventListener("click", () => {
+    valor = (valor + 1) 
+    display.textContent = valor;
+    display.focus();
+
+//    if (i < 3) displays[i + 1].focus();
+  });
+
+  // 🔽 BAja
+  down.addEventListener("click", () => {
+    valor = (valor - 1 + 10) 
+    display.textContent = valor;
+    display.focus();
+
+  //  if (i < 3) displays[i + 1].focus();
+  });
+
+  // ⌨️ TECLADO
+  display.addEventListener("keydown", (e) => {
+    if (/^[0-9]$/.test(e.key)) {
+      valor = Number(e.key);
+      display.textContent = valor;
+
+      if (i < 3) displays[i + 1].focus();
     }
+
+    if (e.key === "Backspace" && i > 0) {
+      displays[i - 1].focus();
+    }
+
+    e.preventDefault();
+  });
+
+  cont.appendChild(up);
+  cont.appendChild(display);
+  cont.appendChild(down);
+
+  inputs.push(() => valor);
+  displays.push(display);
+
+  inputsContainer.appendChild(cont);
+}
+
 
     // 🔹 BOTÓN COMPROBAR
     const comprobar = document.createElement("button");

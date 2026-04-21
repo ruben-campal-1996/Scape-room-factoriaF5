@@ -161,14 +161,14 @@
   height: 200px;
 }
 
-.codigo-container {
+/*.codigo-container {
   display: flex;
   gap: 15px;
   justify-content: center;
 
 }
 
-/* 🔥 INPUTS TIPO CAJITAS */
+//🔥 INPUTS TIPO CAJITAS 
 .codigo-input {
   width: 70px;
   height: 90px;
@@ -178,6 +178,36 @@
   border: none;
   outline: none;
    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}*/
+
+
+
+/* 🔹 EFECTO CUANDO TIENE FOCO */
+.digit-display:focus {
+  box-shadow: 0 0 15px #00ff00;
+  transform: scale(1.05);
+}
+
+/* 🔹 BOTONES ▲ ▼ */
+.btn-flecha {
+  background: none;
+  border: none;
+  color: white;
+
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+}
+
+/* 🔹 HOVER */
+.btn-flecha:hover {
+  transform: scale(1.3);
+}
+
+/* 🔹 CLICK */
+.btn-flecha:active {
+  transform: scale(0.9);
 }
 
 .codigo-input:focus {
