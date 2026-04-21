@@ -13,7 +13,3 @@ cerrar.addEventListener("click", () => {
 import { reto1 } from "./reto1.js";
 
 reto1();
-
-
-
-

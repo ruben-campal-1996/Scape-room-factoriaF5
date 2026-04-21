@@ -1,0 +1,195 @@
+@import "style.css";
+/* ========================= */
+/*  RETO 3 - PANTALLA */
+/* ========================= */
+
+#reto3-content{
+  padding: var(--space-xl);
+  color: var(--color-text-main);
+}
+
+/* CONTENIDO GENERAL */
+.reto3-content , .pantalla-maletas,
+.pantalla-seleccion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+.titulo-emergente, .maletas{
+   display: flex;
+   justify-content: center;
+   padding: var(--font-size-h2);
+  font-family: var(--font-heading);
+ 
+  font-weight: var(--font-weight-bold);
+
+  color: var(--color-text-main);
+
+  text-shadow: 0 0 10px black;
+}
+
+/* ========================= */
+/*  IMAGEN */
+/* ========================= */
+
+.imagen-container {
+  position: relative;
+  order: -1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.imagen-container img {
+  width: 100%;
+  max-width: 500px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 16px;
+
+  /* efecto oscuro tipo juego */
+  filter: brightness(0.6);
+}
+
+
+/* ========================= */
+/*  TEXTO HISTORIA */
+/* ========================= */
+article {
+background-color:rgba(179, 179, 179, 0.7);   /*le da un 70% de transperencia*/
+border-radius: 10px;
+padding: 2rem;
+
+}
+.texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+
+  font-family: var(--font-body);
+  font-size: var(--font-size-p);
+
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* ========================= */
+/*  BOTÓN */
+/* ========================= */
+
+.boton-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.boton-container button {
+  background-color: var(--color-primary);
+  color: var(--color-text-main);
+
+  padding: 14px 40px;
+  border: none;
+  border-radius: 30px;
+
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+
+  cursor: pointer;
+
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
+}
+
+.boton-container button:hover {
+  background-color: var(--color-hover);
+  transform: scale(1.05);
+}
+.boton-container button:active {
+  background-color: #2B2B2B;
+  transform: scale(0.95);
+}
+
+/* CONTENEDOR RELATIVO */
+.zona-mapa {
+  position: relative;
+}
+
+/* ZONAS CLICKABLES */
+.zona-maleta {
+  position: absolute;
+  width: 80px;
+  height: 50px;
+  cursor: pointer;
+
+  border-radius: 10px;
+
+  /* debug visual (luego quitas esto) */
+  background: rgba(255, 0, 0, 0.2);
+  transition: transform 0.2s, background 0.2s;
+}
+
+/* HOVER */
+.zona-maleta:hover {
+  transform: scale(1.1);
+  background: rgba(255, 0, 0, 0.4);
+}
+
+
+.zona-mapa {
+  position: relative;
+}
+
+.zona-maleta {
+  position: absolute;
+}
+/* izquierda */
+.zona-maleta:nth-child(2) {
+  bottom: 25%;
+  left: 20%;
+}
+
+/* centro */
+.zona-maleta:nth-child(3) {
+  bottom: 25%;
+  left: 45%;
+}
+
+/* derecha */
+.zona-maleta:nth-child(4) {
+  bottom: 25%;
+  left: 70%;
+}
+
+/* ========================= */
+/*  MEDIA QUERIES */
+/* ========================= */
+
+@media (min-width: 768px) {
+
+  .reto3-content , .pantalla-maletas {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: var(--space-xl);
+  }
+
+  /* IZQUIERDA */
+    .lado-izquierdo {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+  .imagen-container {
+    flex: 1;
+  }
+
+  .boton-container {
+    justify-content: center;
+  }
+
+}
+
