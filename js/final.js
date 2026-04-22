@@ -55,6 +55,7 @@ function mostrarFinalMalo() {
   contentContainer.appendChild(a_return);
   const audioDerrota = document.createElement("audio");
   audioDerrota.src = "/assets/themes/zombie-sound.mp3";
+  audioDerrota.id = "audio-derrota";
   audioDerrota.preload = "auto";
   audioDerrota.play();
 }

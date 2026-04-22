@@ -84,8 +84,6 @@ export function reto1() {
     const inputsContainer = document.createElement("div");
     inputsContainer.classList.add("codigo-container");
 
-    const inputs = [];
-
     const beep = document.getElementById("beep-sound");
 
     for (let i = 0; i < 4; i++) {
@@ -112,6 +110,7 @@ export function reto1() {
         valor = (valor + 1) % 10;
         display.textContent = valor;
         display.focus();
+        beep.play();
         });
 
       // 🔽 BAja
@@ -119,6 +118,7 @@ export function reto1() {
         valor = (valor - 1 + 10) % 10;
         display.textContent = valor;
         display.focus();
+        beep.play();
       });
 
       // ⌨️ TECLADO
@@ -135,6 +135,7 @@ export function reto1() {
         }
 
         e.preventDefault();
+        beep.play();
       });
 
       cont.appendChild(up);
