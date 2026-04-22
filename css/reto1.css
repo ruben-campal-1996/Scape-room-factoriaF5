@@ -1,7 +1,7 @@
 @import "style.css";
 
 #reto {
-  padding: var(--space-xl);
+  padding: var(--space-sm);
   color: var(--color-text-main);
 }
 

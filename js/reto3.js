@@ -1,5 +1,5 @@
 export function iniciarReto3() {
-  const contenedor = document.getElementById("reto-1"); //Cambiarlo por reto 2 en cuanto este
+  const contenedor = document.getElementById("reto"); //Cambiarlo por reto 2 en cuanto este
 
   /* ========================= */
   /*  PRIMERA PANTALLA         */
@@ -53,7 +53,7 @@ export function iniciarReto3() {
 /* ========================= */
 
 function mostrarSeleccionMaletas() {
-  const contenedor = document.getElementById("reto-1");
+  const contenedor = document.getElementById("reto");
 
   contenedor.innerHTML = "";
   contenedor.className = "pantalla-contexto";
@@ -102,7 +102,7 @@ function mostrarSeleccionMaletas() {
 /*  TERCERA PANTALLA         */
 /* ========================= */
 function abrirMaleta(id) {
-  const contenedor = document.getElementById("reto-1");
+  const contenedor = document.getElementById("reto");
 
   contenedor.innerHTML = "";
   contenedor.className = "pantalla-contexto";

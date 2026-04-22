@@ -189,7 +189,9 @@ botonReintentar.addEventListener("click", () => {
     mensajeOverlay.classList.add("hidden")
 })
 botonContinuar.addEventListener("click", () => {
-    main.innerHTML = ""
+    mensajeOverlay.remove()
+    hero.innerHTML = ""
+    hero.className = ""
     iniciarReto3() // La función que corresponda
 })
 
