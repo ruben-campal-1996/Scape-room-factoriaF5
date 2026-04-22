@@ -6,17 +6,11 @@ import { iniciarReto3 } from "./reto3.js"; /* PARA ENLAZAR LOS RETOS ENTRE ELLOS
 export function reto1() {
   const contenedor = document.getElementById("reto");
 
-  // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
-  document.addEventListener("DOMContentLoaded", () => {
-    const btnAbandonar = document.getElementById("abandonar");
+  
   // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
   document.addEventListener("DOMContentLoaded", () => {
     const btnAbandonar = document.getElementById("abandonar");
 
-    if (btnAbandonar) {
-      btnAbandonar.addEventListener("click", abandonarJuego);
-    }
-  }); // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
     if (btnAbandonar) {
       btnAbandonar.addEventListener("click", abandonarJuego);
     }
