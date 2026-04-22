@@ -41,6 +41,49 @@ class JuegoReto3 {
       ),
     ];
   }
+  activarProximidad() {
+    const maletas = document.querySelectorAll(".maleta");
+
+    const handler = (x, y) => {
+      maletas.forEach((maleta) => {
+        const rect = maleta.getBoundingClientRect();
+
+        const centroX = rect.left + rect.width / 2;
+        const centroY = rect.top + rect.height / 2;
+
+        const dx = x - centroX;
+        const dy = y - centroY;
+
+        const distancia = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 180;
+
+        if (distancia < maxDist) {
+          const intensidad = 1 - distancia / maxDist;
+
+          maleta.style.transform = `
+  scale(${1 + intensidad * 0.4})
+`;
+
+          maleta.style.filter = `
+          brightness(${1 + intensidad * 0.5})
+          drop-shadow(0 0 ${intensidad * 20}px rgba(255,255,255,0.6))
+        `;
+        } else {
+          maleta.style.transform = "translate(-50%, -50%) scale(1)";
+          maleta.style.filter = "none";
+        }
+      });
+    };
+
+    document.addEventListener("mousemove", (e) => {
+      handler(e.clientX, e.clientY);
+    });
+
+    document.addEventListener("touchmove", (e) => {
+      const touch = e.touches[0];
+      handler(touch.clientX, touch.clientY);
+    });
+  }
 
   iniciar() {
     this.mostrarIntro();
@@ -66,11 +109,9 @@ class JuegoReto3 {
     titulo.textContent = "¡ESTAS MAMADÍSIMO!";
 
     const texto = document.createElement("p");
-    texto.innerHTML = `
-        Una pena que nadie haya podido ver tu heroicidad...
+    texto.innerHTML = ` Una pena que nadie haya podido ver tu heroicidad...
         Has conseguido abrirte paso por la oleada zombie.
-        Sales de la habitación y te pones a explorar...
-    `;
+        Sales de la habitación y te pones a explorar...`;
 
     const boton = document.createElement("button");
     boton.textContent = "EXPLORAR SALA";
@@ -97,29 +138,23 @@ class JuegoReto3 {
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("sala-fondo");
 
-    const zonas = [
-      { id: 0, top: "20%", left: "55%" },
-      { id: 1, top: "25%", left: "78%" },
-      { id: 2, top: "32%", left: "85%" },
-    ];
+    const maletasWrapper = document.createElement("div");
+    maletasWrapper.classList.add("maletas-wrapper");
 
-    zonas.forEach((z) => {
+    this.maletas.forEach((m) => {
       const maleta = document.createElement("img");
 
-      maleta.src = "../assets/img/resources/maleta-cerrada.png"; //  añade esta imagen
+      maleta.src = "../assets/img/resources/maleta-cerrada.png";
       maleta.classList.add("maleta");
 
-      maleta.style.position = "absolute";
-      maleta.style.top = z.top;
-      maleta.style.left = z.left;
-
       maleta.addEventListener("click", () => {
-        const m = this.maletas.find((m) => m.id == z.id);
         this.animarApertura(maleta, m);
       });
 
-      imgContainer.appendChild(maleta);
+      maletasWrapper.appendChild(maleta);
     });
+
+    imgContainer.appendChild(maletasWrapper);
 
     const textoContainer = document.createElement("div");
     textoContainer.classList.add("texto");
@@ -130,8 +165,9 @@ class JuegoReto3 {
 
     textoContainer.appendChild(texto);
 
-imgContainer.appendChild(textoContainer);
-this.contenedor.appendChild(imgContainer);
+    imgContainer.appendChild(textoContainer);
+    this.contenedor.appendChild(imgContainer);
+    this.activarProximidad();
   }
 
   animarApertura(elemento, maleta) {
