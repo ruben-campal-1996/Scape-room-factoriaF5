@@ -1,195 +1,142 @@
-@import "style.css";
 /* ========================= */
-/*  RETO 3 - PANTALLA */
+/* CONTENEDOR GENERAL 
 /* ========================= */
 
-#reto3-content{
-  padding: var(--space-xl);
-  color: var(--color-text-main);
-}
+.pantalla-maletas {
+  width: 100%;
+  min-height: 100vh;
 
-/* CONTENIDO GENERAL */
-.reto3-content , .pantalla-maletas,
-.pantalla-seleccion {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xl);
-}
-.titulo-emergente, .maletas{
-   display: flex;
-   justify-content: center;
-   padding: var(--font-size-h2);
-  font-family: var(--font-heading);
- 
-  font-weight: var(--font-weight-bold);
+  align-items: center;
 
-  color: var(--color-text-main);
-
-  text-shadow: 0 0 10px black;
+  gap: 20px;
+  padding: 20px;
 }
 
 /* ========================= */
-/*  IMAGEN */
+/* SALA DE MALETAS  
 /* ========================= */
 
 .imagen-container {
-  position: relative;
-  order: -1;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  max-width: 900px;
 
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .imagen-container img {
   width: 100%;
-  max-width: 500px;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 16px;
-
-  /* efecto oscuro tipo juego */
-  filter: brightness(0.6);
+  display: block;
+  border-radius: 20px;
 }
 
-
-/* ========================= */
-/*  TEXTO HISTORIA */
-/* ========================= */
-article {
-background-color:rgba(179, 179, 179, 0.7);   /*le da un 70% de transperencia*/
-border-radius: 10px;
-padding: 2rem;
-
+.mapa {
+  position: relative;
 }
+
+/* zonas invisibles clicables */
+.zona-maleta {
+  position: absolute;
+  width: 100px;
+  height: 80px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10; 
+    background: rgba(255, 0, 0, 0.3);
+}
+
+/* hover efecto pro */
+.zona-maleta:hover {
+  outline: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  transform: scale(1.05);
+}
+
+/* ========================= */
+/*  TEXTO 
+/* ========================= */
+
 .texto {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  width: 100%;
+  max-width: 800px;
 
-  font-family: var(--font-body);
-  font-size: var(--font-size-p);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
 
-  line-height: 1.6;
-  text-align: left;
+  border-radius: 20px;
+  padding: 20px;
+
+  text-align: center;
+  color: white;
+}
+
+.texto h2 {
+  margin-bottom: 10px;
+}
+
+.texto p {
+  line-height: 1.5;
 }
 
 /* ========================= */
-/*  BOTÓN */
+/*  BOTONES 
 /* ========================= */
 
 .boton-container {
   display: flex;
   justify-content: center;
-  padding: 1rem;
+  gap: 15px;
 }
 
-.boton-container button {
-  background-color: var(--color-primary);
-  color: var(--color-text-main);
+/* reutiliza tu estilo existente */
+.btn-rojo , .btnVolver{
+  background-color: #b30000;
+  color: white;
 
-  padding: 14px 40px;
+  padding: 12px 25px;
+  border-radius: 20px;
   border: none;
-  border-radius: 30px;
-
-  font-family: var(--font-body);
-  font-weight: var(--font-weight-medium);
 
   cursor: pointer;
-
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
-  transition: all 0.2s ease;
+  transition: 0.3s;
 }
 
-.boton-container button:hover {
-  background-color: var(--color-hover);
+.btn-rojo , .btnVolver :hover {
+  background-color: #ff0000;
   transform: scale(1.05);
 }
-.boton-container button:active {
-  background-color: #2B2B2B;
-  transform: scale(0.95);
-}
 
-/* CONTENEDOR RELATIVO */
-.zona-mapa {
-  position: relative;
-}
+/* ========================= */
+/* 🧳 MALETA ABIERTA */
+/* ========================= */
 
-/* ZONAS CLICKABLES */
-.zona-maleta {
-  position: absolute;
-  width: 80px;
-  height: 50px;
+#maletaImg {
   cursor: pointer;
-
-  border-radius: 10px;
-
-  /* debug visual (luego quitas esto) */
-  background: rgba(255, 0, 0, 0.2);
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.3s ease;
 }
 
-/* HOVER */
-.zona-maleta:hover {
-  transform: scale(1.1);
-  background: rgba(255, 0, 0, 0.4);
-}
-
-
-.zona-mapa {
-  position: relative;
-}
-
-.zona-maleta {
-  position: absolute;
-}
-/* izquierda */
-.zona-maleta:nth-child(2) {
-  bottom: 25%;
-  left: 20%;
-}
-
-/* centro */
-.zona-maleta:nth-child(3) {
-  bottom: 25%;
-  left: 45%;
-}
-
-/* derecha */
-.zona-maleta:nth-child(4) {
-  bottom: 25%;
-  left: 70%;
+#maletaImg:hover {
+  transform: scale(1.02);
 }
 
 /* ========================= */
-/*  MEDIA QUERIES */
+/* 🎬 ANIMACIONES (OPCIONAL) */
 /* ========================= */
 
-@media (min-width: 768px) {
-
-  .reto3-content , .pantalla-maletas {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: var(--space-xl);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
   }
-
-  /* IZQUIERDA */
-    .lado-izquierdo {
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-
-
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-
-  .imagen-container {
-    flex: 1;
-  }
-
-  .boton-container {
-    justify-content: center;
-  }
-
 }
 
+.pantalla-maletas {
+  animation: fadeIn 0.3s ease;
+}

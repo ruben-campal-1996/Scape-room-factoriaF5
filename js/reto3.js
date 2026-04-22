@@ -1,269 +1,189 @@
 export function iniciarReto3() {
-  const contenedor = document.getElementById("reto-1");
+  const contenedor = document.getElementById("reto-1"); //Cambiarlo por reto 2 en cuanto este
 
+  /* ========================= */
+  /*  PRIMERA PANTALLA         */
+  /* ========================= */
 
+  contenedor.innerHTML = "";
+  contenedor.className = "pantalla-contexto"; // 👈 reutilizamos lo que se ha creado en reto1.js
 
+  //IMAGEN AGARRAMOS LOS CONTENEDORES Y LOS MODIFICAMOS
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("img-container");
 
-  contenedor.innerHTML = `
-    <div class="reto3-content">
+  const img = document.createElement("img");
+  img.src = "../assets/img/resources/victoria.png";
+  imgContainer.appendChild(img);
 
-      <!-- LADO IZQUIERDO -->
-      <div class="lado-izquierdo">
+  //TEXTO
+  const textoContainer = document.createElement("div");
+  textoContainer.classList.add("texto-container");
 
-        <div class="titulo-emergente">
-          <h2 class="texto-supervivencia">¡HAS SOBREVIVIDO!</h2>
-        </div>
+  const titulo = document.createElement("h1");
+  titulo.textContent = "¡ESTAS MAMADÍSIMO!";
 
-        <article class="texto">
-          <p>Una pena que nadie haya podido ver tu heroicidad...</p>
-          <p>Has conseguido abrirte paso por la oleada zombie.</p>
-          <p>Sales de la habitación y te pones a explorar...</p>
-        </article>
-
-        <div class="boton-container">
-          <button id="explorarBtn">EXPLORAR SALAS</button>
-        </div>
-
-      </div>
-
-     
-      <figure class="imagen-container">
-        <img src="../assets/img/resources/victoria.png" alt="Victoria">
-      </figure>
-
-    </div>
+  const texto = document.createElement("p");
+  texto.innerHTML = `
+        Una pena que nadie haya podido ver tu heroicidad...
+        Has conseguido abrirte paso por la oleada zombie.
+        Sales de la habitación y te pones a explorar...
   `;
-  mostrarPantalla();
+
+  const boton = document.createElement("button");
+  boton.textContent = "EXPLORAR SALA";
+  boton.classList.add("btn-rojo");
+
+  // CAMBIO DE PANTALLA
+  boton.addEventListener("click", () => {
+    mostrarSeleccionMaletas();
+  });
+
+  //
+  textoContainer.appendChild(titulo);
+  textoContainer.appendChild(texto);
+  textoContainer.appendChild(boton);
+
+  contenedor.appendChild(imgContainer);
+  contenedor.appendChild(textoContainer);
 }
 
 /* ========================= */
 /*  SEGUNDA PANTALLA         */
 /* ========================= */
 
-function activarBoton() {
-  document.getElementById("explorarBtn").addEventListener("click", () => {
-    mostrarPantallaMaletas(); //  CAMBIO DE PANTALLA
-  });
-}
-function mostrarPantallaMaletas() {
-  const container = document.getElementById("reto3-container");
-
-  container.innerHTML = `
-   <div class="pantalla-maletas">
-
-
-    <div class="lado-izquierdo">
-
-     <div class="titulo-emergente">
-        <h2 class="texto-supervivencia">CREO QUE ES MOMENTO DE CORRER:</h2>
-      </div>
-
-     
-      <article class="texto">
-        <h2>¡QUE SUERTE!</h2>
-        <p>Hemos encontrado unas maletas con algunos objetos</p>
-        <p>Parece que le caemos bien a alguien de arriba...</p>
-        <p>Pero... ¿Cuál me llevo?</p>
-      </article>
-
-      
-      <div class="boton-container">
-        <button id="abrirMaletasBtn">ABRIR MALETAS</button>
-      </div>
-
-    </div>
-
-
-  
-       <figure class="imagen-container">
-        <img src="../assets/img/resources/habitacion-maletas.png" alt="Maletas">
-      </figure>
-
-    
-   
-    </div>
-  `;
-
-  activarBotonMaletas();
-}
-
-
-/* ========================= */
-/*  TERCERA PANTALLA        */
-/* ========================= */
-
-/*aCTIVAR BOTON*/
-function activarBotonMaletas() {
-  const boton = document.getElementById("abrirMaletasBtn");
-
-  boton.addEventListener("click", () => {
-    mostrarSeleccionMaletas(); //  aquí cambiamos de pantalla
-  });
-}
-
-
-/*PANTALLA 3 MALETAS*****/
-
-// ==========================
-// 🧠 CLASE
-// ==========================
-class Maleta {
-  constructor(id, correcta, objetos) {
-    this.id = id;
-    this.correcta = correcta;
-    this.objetos = objetos;
-  }
-}
-
-// ==========================
-// 📦 DATOS
-// ==========================
-const maletas = [
-  new Maleta(0, true, [
-    "📕 libro de supervivencia",
-    "🔪 cuchillo",
-    "💧 cantimplora",
-  ]),
-  new Maleta(1, false, ["🎮 gameboy", "🧴 crema solar", "🧻 toalla"]),
-  new Maleta(2, false, ["🧸 peluche", "🍫 chocolate", "🎧 cascos"]),
-];
-
-// ==========================
-// 🧳 PANTALLA MALETAS
-// ==========================
 function mostrarSeleccionMaletas() {
-  const container = document.getElementById("reto3-container");
+  const contenedor = document.getElementById("reto-1");
 
-  container.innerHTML = `
-    <div class="pantalla-maletas">
+  contenedor.innerHTML = "";
+  contenedor.className = "pantalla-contexto";
 
-    
+  //SALA
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("img-container");
 
-      <!-- MALETAS -->
-    <div class="imagen-container zona-mapa">
+  const img = document.createElement("img");
+  img.src = "../assets/img/resources/habitacion-maletas.png";
+  imgContainer.appendChild(img);
 
-  <img src="../assets/img/resources/habitacion-maletas.png">
+  // ZONAS DE MALETAS
+  const zonas = [
+    { id: 0, top: "60%", left: "65%" },
+    { id: 1, top: "65%", left: "78%" },
+    { id: 2, top: "62%", left: "85%" }
+  ];
+  zonas.forEach(z => {
+    const zona = document.createElement("div");
+    zona.classList.add("zona-maleta");
+    zona.style.top = z.top;
+    zona.style.left = z.left;
+    zona.dataset.id = z.id;
 
-  ${maletas
-    .map(
-      (m) => `
-    <div class="zona-maleta" data-id="${m.id}"></div>
-  `,
-    )
-    .join("")}
+    zona.addEventListener("click", () => abrirMaleta(z.id));
 
-</div>
-      <!-- TEXTO -->
-      <article class="texto">
-        <p>Solo puedes llevarte una...</p>
-        <p>¿Cuál te ayudará a sobrevivir?</p>
-      </article>
-
-    </div>
-  `;
-
-  activarEventosMaletas();
-}
-
-// ==========================
-// ⚙️ EVENTOS
-// ==========================
-function activarEventosMaletas() {
- const maletasDOM = document.querySelectorAll(".zona-maleta");
-
-  maletasDOM.forEach((m) => {
-    m.addEventListener("click", () => {
-      const id = m.dataset.id;
-      const seleccion = maletas[id];
-
-      mostrarDetalleMaleta(seleccion);
-    });
-  });
-}
-
-// ==========================
-// 📂 MALETA ABIERTA
-// ==========================
-function mostrarDetalleMaleta(maleta) {
-  const container = document.getElementById("reto3-container");
-
-  container.innerHTML = `
-    <div class="pantalla-maletas">
-
-      <!-- IMAGEN -->
-      <figure class="imagen-container">
-        <img src="../assets/img/resources/maleta-abierta.png">
-      </figure>
-
-      <!-- CONTENIDO -->
-      <article class="texto">
-        <h3>Contenido:</h3>
-        <ul>
-          ${maleta.objetos.map((o) => `<li>${o}</li>`).join("")}
-        </ul>
-      </article>
-
-      <!-- BOTONES -->
-      <div class="boton-container">
-        <button id="elegirBtn">ELEGIR MALETA</button>
-        <button id="volverBtn">VOLVER</button>
-      </div>
-
-    </div>
-  `;
-
-  document.getElementById("elegirBtn").addEventListener("click", () => {
-    mostrarResultado(maleta);
+    imgContainer.appendChild(zona);
   });
 
-  document.getElementById("volverBtn").addEventListener("click", () => {
-    mostrarSeleccionMaletas();
-  });
+  //TEXTO DENTRO DE SALA
+  const textoContainer = document.createElement("div");
+  textoContainer.classList.add("texto-container");
+
+  const texto = document.createElement("p");
+  texto.textContent = "Solo puedes llevarte una...¿Cuál es la que mejor te ayudará a sobrevivir?";
+
+
+  textoContainer.appendChild(texto);
+ // MONTAJE
+  contenedor.appendChild(imgContainer);
+  contenedor.appendChild(textoContainer);
 }
 
-// ==========================
-// 🎯 RESULTADO
-// ==========================
-function mostrarResultado(maleta) {
-  const container = document.getElementById("reto3-container");
+/* ========================= */
+/*  TERCERA PANTALLA         */
+/* ========================= */
+function abrirMaleta(id) {
+  const contenedor = document.getElementById("reto-1");
 
-  if (maleta.correcta) {
-    container.innerHTML = `
-      <div class="pantalla-maletas">
+  contenedor.innerHTML = "";
+  contenedor.className = "pantalla-contexto";
 
-        <figure class="imagen-container">
-          <img src="../assets/img/resources/habitacion-maletas.png">
-        </figure>
+  // IMAGEN MALETAS
+  const imgContainer = document.createElement("div");
+  imgContainer.classList.add("img-container");
 
-        <article class="texto">
-          <h2>✅ HAS SOBREVIVIDO</h2>
-          <p>Buena elección.</p>
-        </article>
+  const img = document.createElement("img");
 
-        <div class="boton-container">
-          <button onclick="mostrarSeleccionMaletas()">VOLVER A JUGAR</button>
-        </div>
+  let textoContenido = "";
 
-      </div>
-    `;
-  } else {
-    container.innerHTML = `
-      <div class="pantalla-maletas">
-
-        <figure class="imagen-container">
-          <img src="../assets/img/resources/habitacion-maletas.png">
-        </figure>
-
-        <article class="texto">
-          <h2 style="color:red;">GAME OVER</h2>
-          <p>No estabas preparado...</p>
-        </article>
-
-        <div class="boton-container">
-          <button onclick="mostrarSeleccionMaletas()">REINTENTAR</button>
-        </div>
-
-      </div>
-    `;
+  if (id == 0) {
+    img.src = "../assets/img/resources/maleta-sol.png";
+    textoContenido = "Toalla, gameboy y crema solar... Lamentablemente no tenemos tiempo de broncearnos en la playa.";
   }
+
+  if (id == 1) {
+    img.src = "../assets/img/resources/maleta-programador.png";
+    textoContenido = "Portátil, Auriculares y mouse...Siempre hay tiempo para analizar código, ¿no?";
+  }
+
+  if (id == 2) {
+    img.src = "../assets/img/resources/maleta-correcta.png";
+    textoContenido = "Cuchillo, manual de supervivencia(¡Qué oportuno!) y cantimplora";
+  }
+
+  img.id = "maletaImg";
+
+  imgContainer.appendChild(img);
+
+  // TEXTO
+  const textoContainer = document.createElement("div");
+  textoContainer.classList.add("texto-container");
+
+  const texto = document.createElement("p");
+  texto.textContent = textoContenido;
+
+  //  BOTÓN ELEGIR
+  const botonElegir = document.createElement("button");
+  botonElegir.textContent = "ELEGIR";
+  botonElegir.classList.add("btn-rojo");
+
+  //BOTON VOLVER 
+const botonVolver = document.createElement("button");
+botonVolver.textContent = "VOLVER";
+botonVolver.classList.add("btn-rojo");
+
+botonVolver.addEventListener("click", () => {
+  mostrarSeleccionMaletas();
+});
+
+  // 🔥 EVENTO ELEGIR
+  botonElegir.addEventListener("click", () => {
+    comprobarResultado(id);
+  });
+
+  textoContainer.appendChild(texto);
+  textoContainer.appendChild(botonElegir);
+ textoContainer.appendChild(botonVolver);
+  // 🔹 MONTAJE
+  contenedor.appendChild(imgContainer);
+  contenedor.appendChild(textoContainer);
+
 }
+
+
+
+//RESULTADO
+function comprobarResultado(id) {
+
+  //MALETA  CORRECTA (maleta 3 → id 2)
+  if (id == 2) {
+    localStorage.setItem("estadoJuego", "ganado");
+    window.location.href = "./templates/final.html";
+    return;
+  }
+
+  // MALETA INCORRECTA
+  localStorage.setItem("estadoJuego", "perdido");
+  window.location.href = "./templates/final.html";
+}
+
+

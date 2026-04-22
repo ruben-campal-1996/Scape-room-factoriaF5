@@ -2,14 +2,21 @@
 import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 import { reto2Contexto } from "./reto2.js";
 import { iniciarReto3 } from "./reto3.js"; /* PARA ENLAZAR LOS RETOS ENTRE ELLOS DEBERIAMOS AQUI AÑADIR EL RETO 2 EN CUANTO ESTE*/
- 
+
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
 
   // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
   document.addEventListener("DOMContentLoaded", () => {
     const btnAbandonar = document.getElementById("abandonar");
+  // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnAbandonar = document.getElementById("abandonar");
 
+    if (btnAbandonar) {
+      btnAbandonar.addEventListener("click", abandonarJuego);
+    }
+  }); // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
     if (btnAbandonar) {
       btnAbandonar.addEventListener("click", abandonarJuego);
     }
@@ -189,6 +196,9 @@ export function reto1() {
         contenedor.classList.add("pantalla-reto");
 
         const errorWrapper = document.createElement("div");
+        errorWrapper.classList.add(
+          "resultado-container",
+        ); /*lo corregí para ahorrar lineas de codigo*/
         errorWrapper.classList.add(
           "resultado-container",
         ); /*lo corregí para ahorrar lineas de codigo*/
