@@ -1,8 +1,9 @@
 import { iniciarReto3 } from "./reto3.js"
 
 // ---FUNCIONES DE CREACIÓN DOM---
-function crearDiv(clase) {
+function crearDiv(id="", clase) {
     const nuevoDiv = document.createElement("div")
+    if (id) {nuevoDiv.id = id}
     nuevoDiv.classList.add(clase)
     return nuevoDiv
 }
@@ -40,15 +41,17 @@ function crearTexto(tag,texto) {
 
 // ---INICIO RETO 2---
 export function reto2Contexto() {
-    const main= document.querySelector("main")
+    const main = document.querySelector("main")
+
+
 
     const hero = crearSection("hero", "hero-section")
-    const divGeneral = crearDiv("general-container")
-    const divImg = crearDiv("img-container-r2")
+    const divGeneral = crearDiv("", "general-container")
+    const divImg = crearDiv("", "img-container-r2")
     const imgPuerta = crearImagen("../assets/img/resources/reto-2-1.png", "puerta abierta con zombies intentando entrar")
-    const textContainer = crearDiv("text-container")
+    const textContainer = crearDiv("", "text-container")
     const h1 = crearTexto("h1", "ENHORABUENA")
-    const pContainer = crearDiv("p-container")
+    const pContainer = crearDiv("", "p-container")
     const textos = [
         "Te vas a abrir paso a traves de la puerta, pero escuchas algo...",
         "¡AGUANTA LA PUERTA!",
@@ -69,7 +72,7 @@ export function reto2Contexto() {
     textContainer.append(h1, pContainer, boton)
 
     boton.addEventListener("click", () => {
-        main.innerHTML = ""
+        hero.innerHTML = ""
         reto2Prueba()
     })
 }
@@ -79,10 +82,10 @@ function reto2Prueba() {
     const main = document.querySelector("main")
 
     const hero = crearSection("hero", "hero-section")
-    const divGeneral = crearDiv("general-container")
-    const divImg = crearDiv("img-container")
-    const divImgItems = crearDiv("img-items-container")
-    const textContainer = crearDiv("textContainer")
+    const divGeneral = crearDiv("","general-container")
+    const divImg = crearDiv("","img-container")
+    const divImgItems = crearDiv("","img-items-container")
+    const textContainer = crearDiv("", "textContainer")
     const imgMesa = crearImagen("../assets/img/resources/mesa-vacia.png", "Imagen de una mesa", "img-mesa")
     const imgObjetos = [
         {
@@ -142,7 +145,7 @@ function reto2Prueba() {
     textContainer.append(h1, boton)
 
    // Overlay base (ya lo tienes)
-const mensajeOverlay = crearDiv("mensaje-overlay")
+const mensajeOverlay = crearDiv("", "mensaje-overlay")
 const mensajeTexto = crearTexto("p", "")
 const botonReintentar = crearBoton("Escoger otro objeto", "btn-reintentar")
 const botonContinuar = crearBoton("Continuar", "btn-continuar") // NUEVO

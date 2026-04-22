@@ -103,7 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         botonOk.addEventListener("click", () => {
           const main = document.querySelector("main")
-          main.innerHTML= ""
+          contenedor.innerHTML= ""
+          contenedor.className = ""
           reto2Contexto();
         });
 
