@@ -1,18 +1,17 @@
 import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 import { iniciarReto3 } from "./reto3.js"; /* PARA ENLAZAR LOS RETOS ENTRE ELLOS DEBERIAMOS AQUI AÑADIR EL RETO 2 EN CUANTO ESTE*/
- 
+
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
 
+  // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnAbandonar = document.getElementById("abandonar");
 
-     // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
-document.addEventListener("DOMContentLoaded", () => {
-  const btnAbandonar = document.getElementById("abandonar");
-
-  if (btnAbandonar) {
-    btnAbandonar.addEventListener("click", abandonarJuego);
-  }
-});     // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
+    if (btnAbandonar) {
+      btnAbandonar.addEventListener("click", abandonarJuego);
+    }
+  }); // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
 
   iniciarJuego();
 
@@ -84,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 🔥 VALIDACIÓN
     comprobar.addEventListener("click", () => {
-      const codigo = inputs.map(i => i.value).join("");
+      const codigo = inputs.map((i) => i.value).join("");
 
       if (codigo === "1234") {
         contenedor.innerHTML = "";
@@ -100,26 +99,27 @@ document.addEventListener("DOMContentLoaded", () => {
         botonOk.textContent = "SIGUIENTE";
         botonOk.classList.add("btn-verde");
 
-      /*   botonOk.addEventListener("click", () => {
+        /*   botonOk.addEventListener("click", () => {
           completarReto();
         });          ESTO LO CAMBIAMO POR EL DE ACONTINUACION PORQUE LLEVAR AL FINAL Y QUEREMOS LLEVARLO AL RETO3 */
 
-botonOk.addEventListener("click", () => {
-  contenedor.innerHTML = '<div id="reto3-content"></div>'; 
-  iniciarReto3();
-});
-        
+        botonOk.addEventListener("click", () => {
+          contenedor.innerHTML = '<div id="reto3-content"></div>';
+          iniciarReto3();
+        });
+
         resultadoWrapper.appendChild(correcto);
         resultadoWrapper.appendChild(botonOk);
 
         contenedor.appendChild(resultadoWrapper);
-
       } else {
         contenedor.innerHTML = "";
         contenedor.classList.add("pantalla-reto");
 
         const errorWrapper = document.createElement("div");
-        errorWrapper.classList.add("resultado-container");  /*lo corregí para ahorrar lineas de codigo*/
+        errorWrapper.classList.add(
+          "resultado-container",
+        ); /*lo corregí para ahorrar lineas de codigo*/
 
         const incorrecto = document.createElement("h1"); /* todos son h1*/
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
@@ -159,4 +159,3 @@ botonOk.addEventListener("click", () => {
 
   contenedor.appendChild(textoContainer);
 }
-
