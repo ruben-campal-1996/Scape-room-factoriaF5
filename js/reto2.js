@@ -45,7 +45,7 @@ export function reto2Contexto() {
 
 
 
-    const hero = crearSection("hero", "hero-section")
+    const hero = document.getElementById("reto")
     const divGeneral = crearDiv("", "general-container")
     const divImg = crearDiv("", "img-container-r2")
     const imgPuerta = crearImagen("../assets/img/resources/reto-2-1.png", "puerta abierta con zombies intentando entrar")
@@ -81,7 +81,7 @@ export function reto2Contexto() {
 function reto2Prueba() {
     const main = document.querySelector("main")
 
-    const hero = crearSection("hero", "hero-section")
+    const hero = document.getElementById("reto")
     const divGeneral = crearDiv("","general-container")
     const divImg = crearDiv("","img-container")
     const divImgItems = crearDiv("","img-items-container")

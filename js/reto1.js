@@ -4,7 +4,7 @@ import { reto2Contexto } from "./reto2.js";
 import { iniciarReto3 } from "./reto3.js"; /* PARA ENLAZAR LOS RETOS ENTRE ELLOS DEBERIAMOS AQUI AÑADIR EL RETO 2 EN CUANTO ESTE*/
 
 export function reto1() {
-  const contenedor = document.getElementById("reto-1");
+  const contenedor = document.getElementById("reto");
 
   // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
   document.addEventListener("DOMContentLoaded", () => {

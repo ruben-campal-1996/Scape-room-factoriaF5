@@ -1,6 +1,6 @@
 @import "style.css";
 
-#reto-1 {
+#reto {
   padding: var(--space-xl);
   color: var(--color-text-main);
 }
@@ -297,7 +297,7 @@
 /*////////////// Version Desktop /////////////////*/
 
 @media (min-width: 768px) {
-  #reto-1 {
+  #reto {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
@@ -326,7 +326,7 @@
     
   }
 
-  #reto-1.pantalla-reto {
+  #reto.pantalla-reto {
     background:
       linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
       url("../assets/img/resources/cifrador.jpeg");
