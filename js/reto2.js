@@ -44,9 +44,9 @@ export function reto2Contexto() {
 
     const hero = crearSection("hero", "hero-section")
     const divGeneral = crearDiv("general-container")
-    const divImg = crearDiv("img-container")
+    const divImg = crearDiv("img-container-r2")
     const imgPuerta = crearImagen("../assets/img/resources/reto-2-1.png", "puerta abierta con zombies intentando entrar")
-    const textContainer = crearDiv("textContainer")
+    const textContainer = crearDiv("text-container")
     const h1 = crearTexto("h1", "ENHORABUENA")
     const pContainer = crearDiv("p-container")
     const textos = [
@@ -60,7 +60,7 @@ export function reto2Contexto() {
         p.textContent = texto
         pContainer.appendChild(p)
     })
-    const boton = crearBoton("Escoger objeto", "btn-reto2")
+    const boton = crearBoton("Escoger objeto", "btn-start-r2")
     
     main.append(hero)
     hero.append(divGeneral)
