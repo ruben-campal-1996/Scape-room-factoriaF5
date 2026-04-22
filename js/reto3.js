@@ -25,20 +25,20 @@ class JuegoReto3 {
         0,
         "../assets/img/resources/maleta-sol.png",
         "Toalla, gameboy y crema solar... Lamentablemente no tenemos tiempo de broncearnos en la playa.",
-        false
+        false,
       ),
       new Maleta(
         1,
         "../assets/img/resources/maleta-programador.png",
         "Portátil, Auriculares y mouse...Siempre hay tiempo para analizar código, ¿no?",
-        false
+        false,
       ),
       new Maleta(
         2,
         "../assets/img/resources/maleta-correcta.png",
         "Cuchillo, manual de supervivencia(¡Qué oportuno!) y cantimplora",
-        true
-      )
+        true,
+      ),
     ];
   }
 
@@ -47,7 +47,7 @@ class JuegoReto3 {
   }
 
   /* PANTALLA 1  */
-  
+
   mostrarIntro() {
     this.contenedor.innerHTML = "";
     this.contenedor.className = "pantalla-contexto";
@@ -88,55 +88,71 @@ class JuegoReto3 {
     this.contenedor.appendChild(textoContainer);
   }
 
-  
   /* PANTALLA 2 */
-  
+
   mostrarSeleccion() {
     this.contenedor.innerHTML = "";
     this.contenedor.className = "pantalla-contexto";
 
     const imgContainer = document.createElement("div");
-    imgContainer.classList.add("img-container");
-
-    const img = document.createElement("img");
-    img.src = "../assets/img/resources/habitacion-maletas.png";
-    imgContainer.appendChild(img);
+    imgContainer.classList.add("sala-fondo");
 
     const zonas = [
-      { id: 0, top: "60%", left: "65%" },
-      { id: 1, top: "65%", left: "78%" },
-      { id: 2, top: "62%", left: "85%" }
+      { id: 0, top: "20%", left: "55%" },
+      { id: 1, top: "25%", left: "78%" },
+      { id: 2, top: "32%", left: "85%" },
     ];
 
-    zonas.forEach(z => {
-      const zona = document.createElement("div");
-      zona.classList.add("zona-maleta");
-      zona.style.top = z.top;
-      zona.style.left = z.left;
+    zonas.forEach((z) => {
+      const maleta = document.createElement("img");
 
-      zona.addEventListener("click", () => {
-        const maleta = this.maletas.find(m => m.id == z.id);
-        this.abrirMaleta(maleta);
+      maleta.src = "../assets/img/resources/maleta-cerrada.png"; //  añade esta imagen
+      maleta.classList.add("maleta");
+
+      maleta.style.position = "absolute";
+      maleta.style.top = z.top;
+      maleta.style.left = z.left;
+
+      maleta.addEventListener("click", () => {
+        const m = this.maletas.find((m) => m.id == z.id);
+        this.animarApertura(maleta, m);
       });
 
-      imgContainer.appendChild(zona);
+      imgContainer.appendChild(maleta);
     });
 
     const textoContainer = document.createElement("div");
-    textoContainer.classList.add("texto-container");
+    textoContainer.classList.add("texto");
 
     const texto = document.createElement("p");
-    texto.textContent = "Solo puedes llevarte una...¿Cuál es la que mejor te ayudará a sobrevivir?";
+    texto.textContent =
+      "Solo puedes llevarte una...¿Cuál es la que mejor te ayudará a sobrevivir?";
 
     textoContainer.appendChild(texto);
 
-    this.contenedor.appendChild(imgContainer);
-    this.contenedor.appendChild(textoContainer);
+imgContainer.appendChild(textoContainer);
+this.contenedor.appendChild(imgContainer);
   }
 
-  
+  animarApertura(elemento, maleta) {
+    elemento.classList.add("maleta-activa");
+
+    this.contenedor.classList.add("fade-out");
+
+    setTimeout(() => {
+      this.contenedor.classList.remove("fade-out");
+
+      this.abrirMaleta(maleta);
+
+      this.contenedor.classList.add("fade-in");
+
+      setTimeout(() => {
+        this.contenedor.classList.remove("fade-in");
+      }, 400);
+    }, 300);
+  }
   /* PANTALLA 3 */
- 
+
   abrirMaleta(maleta) {
     this.contenedor.innerHTML = "";
     this.contenedor.className = "pantalla-contexto";
@@ -151,7 +167,7 @@ class JuegoReto3 {
     imgContainer.appendChild(img);
 
     const textoContainer = document.createElement("div");
-    textoContainer.classList.add("texto-container");
+    textoContainer.classList.add("texto");
 
     const texto = document.createElement("p");
     texto.textContent = maleta.texto;
@@ -184,7 +200,6 @@ class JuegoReto3 {
     });
   }
 
- 
   /* RESULTADO  */
 
   comprobarResultado(maleta) {
