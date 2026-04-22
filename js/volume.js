@@ -1,54 +1,29 @@
 export function volumen() {
-  const bgMusic = document.getElementById('bg-music');
+  const audio = document.getElementById('bg-music');
   const volumeControl = document.getElementById('volume-control');
   const audioToggle = document.getElementById('audio-toggle');
-  
-  // Lista de todos tus efectos de sonido
-  const effects = [
-    document.getElementById('beep-sound'),
-    document.getElementById('open-sound'),
-    document.getElementById('wrong-sound')
-  ];
 
-  // Función interna para aplicar el volumen a todo
-  const updateAllVolumes = (newVolume) => {
-    // Ajustar música de fondo
-    bgMusic.volume = newVolume;
-    
-    // Ajustar cada efecto de la lista
-    effects.forEach(sound => {
-      if (sound) sound.volume = newVolume;
-    });
-  };
+  audio.volume = volumeControl.value;
 
-  // Inicializar todo al valor por defecto del slider (0.05)
-  updateAllVolumes(volumeControl.value);
-
-  // Evento al mover el slider
   volumeControl.addEventListener('input', (e) => {
-    const val = e.target.value;
-    updateAllVolumes(val);
-    
-    // Si estaba silenciado, quitar el mute
-    bgMusic.muted = false;
-
-    // Iniciar la música si está pausada
-    if (bgMusic.paused && val > 0) {
-      bgMusic.play().catch(() => console.log("Esperando interacción..."));
+    audio.volume = e.target.value;
+   
+    if (audio.paused) {
+      audio.play();
     }
     
-    audioToggle.textContent = val == 0 ? "🔇" : "🔊";
+    // Cambiar icono si está en silencio
+    audioToggle.textContent = e.target.value == 0 ? "🔇" : "🔊";
   });
 
-  // Botón de Mute (afecta a todos)
+  // Opcional: Click en el icono para Mutear/Desmutear
   audioToggle.addEventListener('click', () => {
-    const isMuted = !bgMusic.muted;
-    bgMusic.muted = isMuted;
-    
-    effects.forEach(sound => {
-      if (sound) sound.muted = isMuted;
-    });
-
-    audioToggle.textContent = isMuted ? "🔇" : "🔊";
+    if (audio.muted) {
+      audio.muted = false;
+      audioToggle.innerText = "🔊";
+    } else {
+      audio.muted = true;
+      audioToggle.innerText = "🔇";
+    }
   });
 }
