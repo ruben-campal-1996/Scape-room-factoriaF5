@@ -1,3 +1,5 @@
+import { iniciarReto3 } from "./reto3.js"
+
 // ---FUNCIONES DE CREACIÓN DOM---
 function crearDiv(clase) {
     const nuevoDiv = document.createElement("div")
@@ -130,15 +132,62 @@ function reto2Prueba() {
         })
         divImgItems.append(imagen)
     })
-
+    
     const h1 = crearTexto("h1","ESCOGE OBJETO...")
     const boton = crearBoton("Seleccionar", "btn-reto2")
-
     main.append(hero)
     hero.append(divGeneral)
     divGeneral.append(divImg, textContainer)
     divImg.append(imgMesa, divImgItems)
     textContainer.append(h1, boton)
 
+   // Overlay base (ya lo tienes)
+const mensajeOverlay = crearDiv("mensaje-overlay")
+const mensajeTexto = crearTexto("p", "")
+const botonReintentar = crearBoton("Escoger otro objeto", "btn-reintentar")
+const botonContinuar = crearBoton("Continuar", "btn-continuar") // NUEVO
+mensajeOverlay.classList.add("hidden")
+
+
+botonContinuar.classList.add("hidden") // Oculto por defecto
+botonReintentar.classList.add("hidden")
+mensajeOverlay.append(mensajeTexto, botonReintentar, botonContinuar)
+main.append(mensajeOverlay)
+
+boton.addEventListener("click", () => {
+    if (!objetoSeleccionado) {
+        alert("Selecciona un objeto primero")
+        return
+    }
+
+    seleccionBloqueada = true
+    mensajeTexto.textContent = objetoSeleccionado.mensaje
+    mensajeOverlay.classList.remove("hidden")
+
+    if (objetoSeleccionado.correcto) {
+        botonReintentar.classList.add("hidden")
+        botonContinuar.classList.remove("hidden")
+    } else {
+        botonReintentar.classList.remove("hidden")
+        botonContinuar.classList.add("hidden")
+    }
+})
+
+botonReintentar.addEventListener("click", () => {
+    // Resetear estado
+    seleccionBloqueada = false
+    objetoSeleccionado = null
+
+    // Quitar selección visual
+    const todas = document.querySelectorAll(".item")
+    todas.forEach(img => img.classList.remove("seleccionado"))
+
+    // Ocultar overlay
+    mensajeOverlay.classList.add("hidden")
+})
+botonContinuar.addEventListener("click", () => {
+    main.innerHTML = ""
+    iniciarReto3() // La función que corresponda
+})
 
 }

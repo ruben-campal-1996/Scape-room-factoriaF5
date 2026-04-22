@@ -1,7 +1,7 @@
 // ===============================
 // CONFIG
 // ===============================
-const DURACION = 120; // segundos
+const DURACION = 600; // segundos
 
 let tiempo = DURACION;
 let intervalo = null;
