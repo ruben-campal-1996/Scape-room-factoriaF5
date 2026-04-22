@@ -57,7 +57,7 @@ function mostrarFinalMalo() {
   contentContainer.appendChild(a_return);
 }
 
-if(estado == "ganado") {
+if(estado != "ganado") {
   mostrarFinalBueno();
 } else {
   mostrarFinalMalo();

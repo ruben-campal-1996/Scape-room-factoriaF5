@@ -295,9 +295,7 @@ footer {
   flex-shrink: 0;
 }
 
-.h1-final {
-  padding: var(--space-md) var(--space-sm);
-}
+
 
 /*  ---MEDIAQUERIES--- */
 @media (min-width: 768px) {
@@ -332,12 +330,13 @@ footer {
     align-items: center;
     justify-content: space-evenly;
     gap: var(--space-xl);
-    margin-top: 6rem;
+    margin-top: var(--space-md);
   }
 
   .img-container  {
     justify-content: center;
     align-items: center;
+    width: 70%;
   }
 
 
@@ -358,7 +357,7 @@ footer {
 
  
   .btn-return {
-    margin-top: 2rem;
+    margin-top: var(--space-md);
     width: fit-content;
   }
 
