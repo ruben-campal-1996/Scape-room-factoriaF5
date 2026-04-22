@@ -4,15 +4,14 @@ import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 export function reto1() {
   const contenedor = document.getElementById("reto-1");
 
+  // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
+  document.addEventListener("DOMContentLoaded", () => {
+    const btnAbandonar = document.getElementById("abandonar");
 
-     // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
-document.addEventListener("DOMContentLoaded", () => {
-  const btnAbandonar = document.getElementById("abandonar");
-
-  if (btnAbandonar) {
-    btnAbandonar.addEventListener("click", abandonarJuego);
-  }
-});     // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
+    if (btnAbandonar) {
+      btnAbandonar.addEventListener("click", abandonarJuego);
+    }
+  }); // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
 
   iniciarJuego();
 
@@ -77,77 +76,76 @@ document.addEventListener("DOMContentLoaded", () => {
     //   inputsContainer.appendChild(input);
     // }
 
-    // Inputs carrusel 
+    // Inputs carrusel
 
-const inputs = [];
-const displays = [];
+    const inputs = [];
+    const displays = [];
 
-const inputsContainer = document.createElement("div");
-inputsContainer.classList.add("codigo-container");
+    const inputsContainer = document.createElement("div");
+    inputsContainer.classList.add("codigo-container");
 
-for (let i = 0; i < 4; i++) {
-  const cont = document.createElement("div");
-  cont.classList.add("digit-container");
+    for (let i = 0; i < 4; i++) {
+      const cont = document.createElement("div");
+      cont.classList.add("digit-container");
 
-  const up = document.createElement("button");
-  up.classList.add("btn-flecha");
-  up.textContent = "▲";
+      const up = document.createElement("button");
+      up.classList.add("btn-flecha");
+      up.textContent = "▲";
 
-  const display = document.createElement("div");
-  display.classList.add("digit-display");
-  display.textContent = "0";
-  display.tabIndex = 0;
+      const display = document.createElement("div");
+      display.classList.add("digit-display");
+      display.textContent = "0";
+      display.tabIndex = 0;
 
-  const down = document.createElement("button");
-  down.classList.add("btn-flecha");
-  down.textContent = "▼";
+      const down = document.createElement("button");
+      down.classList.add("btn-flecha");
+      down.textContent = "▼";
 
-  let valor = 0;
+      let valor = 0;
 
-  // 🔼 Sube
-  up.addEventListener("click", () => {
-    valor = (valor + 1) 
-    display.textContent = valor;
-    display.focus();
+      // 🔼 Sube
+      up.addEventListener("click", () => {
+        valor = (valor + 1) % 10;
+        display.textContent = valor;
+        display.focus();
 
-//    if (i < 3) displays[i + 1].focus();
-  });
+        //    if (i < 3) displays[i + 1].focus();
+      });
 
-  // 🔽 BAja
-  down.addEventListener("click", () => {
-    valor = (valor - 1 + 10) 
-    display.textContent = valor;
-    display.focus();
+      // 🔽 BAja
+      down.addEventListener("click", () => {
+        valor = (valor - 1 + 10) % 10;
+        display.textContent = valor;
+        display.focus();
 
-  //  if (i < 3) displays[i + 1].focus();
-  });
+        //  if (i < 3) displays[i + 1].focus();
+      });
 
-  // ⌨️ TECLADO
-  display.addEventListener("keydown", (e) => {
-    if (/^[0-9]$/.test(e.key)) {
-      valor = Number(e.key);
-      display.textContent = valor;
+      // ⌨️ TECLADO
+      display.addEventListener("keydown", (e) => {
+        if (/^[0-9]$/.test(e.key)) {
+          valor = Number(e.key);
+          display.textContent = valor;
 
-      if (i < 3) displays[i + 1].focus();
+          if (i < 3) displays[i + 1].focus();
+        }
+
+        if (e.key === "Backspace" && i > 0) {
+          displays[i - 1].focus();
+        }
+
+        e.preventDefault();
+      });
+
+      cont.appendChild(up);
+      cont.appendChild(display);
+      cont.appendChild(down);
+
+      inputs.push(() => valor);
+      displays.push(display);
+
+      inputsContainer.appendChild(cont);
     }
-
-    if (e.key === "Backspace" && i > 0) {
-      displays[i - 1].focus();
-    }
-
-    e.preventDefault();
-  });
-
-  cont.appendChild(up);
-  cont.appendChild(display);
-  cont.appendChild(down);
-
-  inputs.push(() => valor);
-  displays.push(display);
-
-  inputsContainer.appendChild(cont);
-}
-
 
     // 🔹 BOTÓN COMPROBAR
     const comprobar = document.createElement("button");
@@ -156,7 +154,7 @@ for (let i = 0; i < 4; i++) {
 
     // 🔥 VALIDACIÓN
     comprobar.addEventListener("click", () => {
-      const codigo = inputs.map(i => i.value).join("");
+      const codigo = inputs.map((fn) => fn()).join("");
 
       if (codigo === "1234") {
         contenedor.innerHTML = "";
@@ -180,13 +178,14 @@ for (let i = 0; i < 4; i++) {
         resultadoWrapper.appendChild(botonOk);
 
         contenedor.appendChild(resultadoWrapper);
-
       } else {
         contenedor.innerHTML = "";
         contenedor.classList.add("pantalla-reto");
 
         const errorWrapper = document.createElement("div");
-        errorWrapper.classList.add("resultado-container");  /*lo corregí para ahorrar lineas de codigo*/
+        errorWrapper.classList.add(
+          "resultado-container",
+        ); /*lo corregí para ahorrar lineas de codigo*/
 
         const incorrecto = document.createElement("h1"); /* todos son h1*/
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
@@ -226,6 +225,3 @@ for (let i = 0; i < 4; i++) {
 
   contenedor.appendChild(textoContainer);
 }
-
-
-
