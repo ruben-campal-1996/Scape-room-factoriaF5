@@ -108,17 +108,13 @@ export function reto1() {
         valor = (valor + 1) % 10;
         display.textContent = valor;
         display.focus();
-
-        //    if (i < 3) displays[i + 1].focus();
-      });
+        });
 
       // 🔽 BAja
       down.addEventListener("click", () => {
         valor = (valor - 1 + 10) % 10;
         display.textContent = valor;
         display.focus();
-
-        //  if (i < 3) displays[i + 1].focus();
       });
 
       // ⌨️ TECLADO
