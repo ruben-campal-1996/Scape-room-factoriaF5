@@ -1,3 +1,4 @@
+import { reto1 } from "./reto1.js";
 const nav = document.querySelector("#nav");
 const abrir = document.querySelector("#open");
 const cerrar = document.querySelector("#close");
@@ -10,6 +11,11 @@ cerrar.addEventListener("click", () => {
   nav.classList.remove("visible");
 });
 
-import { reto1 } from "./reto1.js";
+// JUEGO (solo si existe el contenedor)   
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedor = document.getElementById("reto-1");
 
-reto1();
+  if (contenedor) {
+    reto1();
+  }
+});

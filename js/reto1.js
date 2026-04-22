@@ -104,8 +104,7 @@ export function reto1() {
         });          ESTO LO CAMBIAMO POR EL DE ACONTINUACION PORQUE LLEVAR AL FINAL Y QUEREMOS LLEVARLO AL RETO3 */
 
         botonOk.addEventListener("click", () => {
-          contenedor.innerHTML = '<div id="reto3-content"></div>';
-          iniciarReto3();
+         iniciarReto3();
         });
 
         resultadoWrapper.appendChild(correcto);
