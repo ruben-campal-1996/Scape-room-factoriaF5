@@ -11,5 +11,11 @@ cerrar.addEventListener("click", () => {
   nav.classList.remove("visible");
 });
 
+// JUEGO (solo si existe el contenedor)   
+document.addEventListener("DOMContentLoaded", () => {
+  const contenedor = document.getElementById("reto");
 
-reto1();
+  if (contenedor) {
+    reto1();
+  }
+});

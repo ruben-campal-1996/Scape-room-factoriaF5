@@ -1,3 +1,4 @@
+import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 export function iniciarReto3() {
   const contenedor = document.getElementById("reto"); //Cambiarlo por reto 2 en cuanto este
 
@@ -143,7 +144,7 @@ function abrirMaleta(id) {
 
   //  BOTÓN ELEGIR
   const botonElegir = document.createElement("button");
-  botonElegir.textContent = "ELEGIR";
+  botonElegir.textContent = "ELEGIR ESTA MALETA";
   botonElegir.classList.add("btn-rojo");
 
   //BOTON VOLVER 
@@ -155,7 +156,7 @@ botonVolver.addEventListener("click", () => {
   mostrarSeleccionMaletas();
 });
 
-  // 🔥 EVENTO ELEGIR
+  // EVENTO ELEGIR
   botonElegir.addEventListener("click", () => {
     comprobarResultado(id);
   });
@@ -163,7 +164,7 @@ botonVolver.addEventListener("click", () => {
   textoContainer.appendChild(texto);
   textoContainer.appendChild(botonElegir);
  textoContainer.appendChild(botonVolver);
-  // 🔹 MONTAJE
+
   contenedor.appendChild(imgContainer);
   contenedor.appendChild(textoContainer);
 
@@ -172,18 +173,14 @@ botonVolver.addEventListener("click", () => {
 
 
 //RESULTADO
+
+  //MALETA  CORRECTA (maleta 3 -> id 2)
 function comprobarResultado(id) {
 
-  //MALETA  CORRECTA (maleta 3 → id 2)
   if (id == 2) {
-    localStorage.setItem("estadoJuego", "ganado");
-    window.location.href = "./templates/final.html";
+    completarReto(); // 🔥 ESTA ES LA CLAVE
     return;
-  }
+  } abandonarJuego();
 
-  // MALETA INCORRECTA
-  localStorage.setItem("estadoJuego", "perdido");
-  window.location.href = "./templates/final.html";
 }
-
 
