@@ -4,6 +4,13 @@
   flex-direction: column;
 }
 
+.pantalla-maleta .img-container img {
+
+display: flex;
+width: 100%;
+  box-shadow: none;
+
+}
 
 /* SALA DE MALETAS  */
 
@@ -27,24 +34,6 @@
   pointer-events: none;
 }
 
-.imagen-container {
-  width: 100%;
-  max-width: 900px;
-
-  position: relative;
-  border-radius: 20px;
-  overflow: visible;
-}
-
-.img-container img {
-  width: 100%;
-  height: auto;
-
-}
-
-.img-container::after {
-  display: none;
-}
 
 .pantalla-seleccion .texto {
   position: absolute;
@@ -172,6 +161,10 @@
   width: 100%;
   display: block;
   animation: abrirMaleta 0.4s ease;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+
 }
 
 #maletaImg {
@@ -186,7 +179,6 @@
 .maleta-wrapper {
   /* MALETA ABIERTA*/
   position: relative;
-  width: clamp(220px, 40vw, 350px);
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -222,7 +214,7 @@
   opacity: 0;
   animation: aparecerObjeto 0.4s ease forwards;
   flex-shrink: 0;
-    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.4));
 }
 
 .objeto:hover {
@@ -230,6 +222,9 @@
   filter: brightness(1.3);
 }
 
+.pantalla-maleta .objeto {
+  max-width: 30%;
+}
 
 /* ANIMACIONES */
 @keyframes abrirMaleta {
@@ -309,16 +304,15 @@
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
 
-  .pantalla-maleta {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
+.pantalla-maleta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
 
   .sala-fondo {
     height: 85vh;
@@ -333,24 +327,23 @@
 
   .texto {
     max-width: 800px;
-   align-self: center;
-text-align: center;
-    
+    align-self: center;
+    text-align: center;
+
 
     font-size: 1.1rem;
   }
-.img-container img {
-  box-shadow: none;
-}
+
   .maleta-wrapper {
     width: clamp(300px, 40vw, 500px);
-    
+
   }
 
-  .pantalla-maleta .texto {
-  align-items: stretch;
-  align-self: flex-end;
-    margin-top: 60px;
-  }
+.pantalla-maleta .objeto {
+  max-width: 40%;
+}
+
+
+
 
 }
