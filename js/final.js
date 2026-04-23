@@ -29,7 +29,11 @@ function mostrarFinalBueno() {
   a_return.className = "btn-return";
   a_return.textContent = "Volver al inicio.";
   contentContainer.appendChild(a_return);
-  
+  const audioVictoria = document.createElement("audio");
+  audioVictoria.src = "/assets/themes/final-victoria.mp3";
+  audioVictoria.id = "audio-derrota";
+  audioVictoria.preload = "auto";
+  audioVictoria.play();
 }
 
 function mostrarFinalMalo() {
