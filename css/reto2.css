@@ -246,6 +246,14 @@ background-color: var(--color-primary);
   max-width: 500px;
   width: 100%;
   height: auto;
+  animation: shake 0.3s infinite
+}
+@keyframes shake {
+0% { transform: translate(0, 0) rotate(0deg); }
+25% { transform: translate(2px, -2px) rotate(-1deg); }
+50% { transform: translate(-2px, 2px) rotate(1deg); }
+75% { transform: translate(2px, 2px) rotate(0deg); }
+100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 .img-container {

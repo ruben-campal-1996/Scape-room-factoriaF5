@@ -5,7 +5,7 @@ import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 class Maleta {
   constructor(id, imagen, texto, correcta, objetos) {
     this.id = id;
-    this.imagen= imagen;
+    this.imagen = imagen;
     this.texto = texto;
     this.correcta = correcta;
     this.objetos = objetos;
@@ -15,11 +15,15 @@ class Maleta {
     return this.correcta;
   }
 }
+
 /* CLASE JUEGO  */
 
 class JuegoReto3 {
   constructor() {
     this.contenedor = document.getElementById("reto");
+
+    // 🎧 AUDIO (solo apertura de maleta)
+    this.soundMaleta = document.getElementById("interaccion-maleta");
 
     this.maletas = [
       new Maleta(
@@ -57,11 +61,18 @@ class JuegoReto3 {
       ),
     ];
   }
+
+  /* 🎧 SONIDO SOLO EN CLICK DE MALETA */
+  playMaletaSound() {
+    if (!this.soundMaleta) return;
+
+    this.soundMaleta.currentTime = 0;
+    this.soundMaleta.play();
+  }
+
   activarProximidad() {
-  if (this.proximidadActiva) return;
-  this.proximidadActiva = true;
-
-
+    if (this.proximidadActiva) return;
+    this.proximidadActiva = true;
 
     const maletas = document.querySelectorAll(".maleta");
 
@@ -81,14 +92,12 @@ class JuegoReto3 {
         if (distancia < maxDist) {
           const intensidad = 1 - distancia / maxDist;
 
-          maleta.style.transform = `
-  scale(${1 + intensidad * 0.4})
-`;
+          maleta.style.transform = `scale(${1 + intensidad * 0.4})`;
 
           maleta.style.filter = `
-          brightness(${1 + intensidad * 0.5})
-          drop-shadow(0 0 ${intensidad * 20}px rgba(255,255,255,0.6))
-        `;
+            brightness(${1 + intensidad * 0.5})
+            drop-shadow(0 0 ${intensidad * 20}px rgba(255,255,255,0.6))
+          `;
         } else {
           maleta.style.transform = "scale(1)";
           maleta.style.filter = "none";
@@ -96,30 +105,30 @@ class JuegoReto3 {
       });
     };
 
-this._mouseHandler = (e) => handler(e.clientX, e.clientY);
-this._touchHandler = (e) => {
-  const touch = e.touches[0];
-  handler(touch.clientX, touch.clientY);
-};
+    this._mouseHandler = (e) => handler(e.clientX, e.clientY);
+    this._touchHandler = (e) => {
+      const touch = e.touches[0];
+      handler(touch.clientX, touch.clientY);
+    };
 
-document.addEventListener("mousemove", this._mouseHandler);
-document.addEventListener("touchmove", this._touchHandler);
+    document.addEventListener("mousemove", this._mouseHandler);
+    document.addEventListener("touchmove", this._touchHandler);
   }
 
   desactivarProximidad() {
-  if (!this.proximidadActiva) return;
+    if (!this.proximidadActiva) return;
 
-  document.removeEventListener("mousemove", this._mouseHandler);
-  document.removeEventListener("touchmove", this._touchHandler);
+    document.removeEventListener("mousemove", this._mouseHandler);
+    document.removeEventListener("touchmove", this._touchHandler);
 
-  this.proximidadActiva = false;
-}
+    this.proximidadActiva = false;
+  }
 
   iniciar() {
     this.mostrarIntro();
   }
 
-  /* PANTALLA 1  */
+  /* PANTALLA 1 */
 
   mostrarIntro() {
     this.contenedor.innerHTML = "";
@@ -139,9 +148,9 @@ document.addEventListener("touchmove", this._touchHandler);
     titulo.textContent = "¡ESTAS MAMADÍSIMO!";
 
     const texto = document.createElement("p");
-    texto.innerHTML = ` Una pena que nadie haya podido ver tu heroicidad...
-        Has conseguido abrirte paso por la oleada zombie.
-        Sales de la habitación y te pones a explorar...`;
+    texto.innerHTML = `Una pena que nadie haya podido ver tu heroicidad...
+Has conseguido abrirte paso por la oleada zombie.
+Sales de la habitación y te pones a explorar...`;
 
     const boton = document.createElement("button");
     boton.textContent = "EXPLORAR SALA";
@@ -178,6 +187,7 @@ document.addEventListener("touchmove", this._touchHandler);
       maleta.classList.add("maleta");
 
       maleta.addEventListener("click", () => {
+        this.playMaletaSound(); // 🎧 SOLO AQUÍ
         this.animarApertura(maleta, m);
       });
 
@@ -197,6 +207,7 @@ document.addEventListener("touchmove", this._touchHandler);
 
     imgContainer.appendChild(textoContainer);
     this.contenedor.appendChild(imgContainer);
+
     this.activarProximidad();
   }
 
@@ -217,16 +228,14 @@ document.addEventListener("touchmove", this._touchHandler);
       }, 400);
     }, 300);
   }
+
   /* PANTALLA 3 */
 
   abrirMaleta(maleta) {
-   this.desactivarProximidad();
+    this.desactivarProximidad();
 
     this.contenedor.innerHTML = "";
     this.contenedor.className = "pantalla-contexto pantalla-maleta";
-
-    
-  
 
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("img-container");
@@ -240,24 +249,18 @@ document.addEventListener("touchmove", this._touchHandler);
 
     maletaWrapper.appendChild(img);
 
-const objetosContainer = document.createElement("div");
-objetosContainer.classList.add("objetos-container");
+    const objetosContainer = document.createElement("div");
+    objetosContainer.classList.add("objetos-container");
 
-maleta.objetos.forEach((ruta, i) => {
-  const obj = document.createElement("img");
-  obj.src = ruta;
-  obj.classList.add("objeto");
+    maleta.objetos.forEach((ruta, i) => {
+      const obj = document.createElement("img");
+      obj.src = ruta;
+      obj.classList.add("objeto");
+      obj.style.animationDelay = `${i * 0.15}s`;
+      objetosContainer.appendChild(obj);
+    });
 
-  obj.style.animationDelay = `${i * 0.15}s`;
-
-  objetosContainer.appendChild(obj);
-});
-
-
-maletaWrapper.appendChild(objetosContainer);
-
-maletaWrapper.appendChild(objetosContainer);
-
+    maletaWrapper.appendChild(objetosContainer);
     imgContainer.appendChild(maletaWrapper);
 
     const textoContainer = document.createElement("div");
@@ -274,6 +277,18 @@ maletaWrapper.appendChild(objetosContainer);
     botonVolver.textContent = "VOLVER";
     botonVolver.classList.add("btn-secundario");
 
+    const botonesContainer = document.createElement("div");
+    botonesContainer.classList.add("boton-container");
+
+    botonesContainer.appendChild(botonElegir);
+    botonesContainer.appendChild(botonVolver);
+
+    textoContainer.appendChild(texto);
+    textoContainer.appendChild(botonesContainer);
+
+    this.contenedor.appendChild(imgContainer);
+    this.contenedor.appendChild(textoContainer);
+
     botonVolver.addEventListener("click", () => {
       this.mostrarSeleccion();
     });
@@ -282,24 +297,12 @@ maletaWrapper.appendChild(objetosContainer);
       this.comprobarResultado(maleta);
     });
 
-const botonesContainer = document.createElement("div");
-botonesContainer.classList.add("boton-container");
-
-botonesContainer.appendChild(botonElegir);
-botonesContainer.appendChild(botonVolver);
-
-textoContainer.appendChild(texto);
-textoContainer.appendChild(botonesContainer);
-
-    this.contenedor.appendChild(imgContainer);
-    this.contenedor.appendChild(textoContainer);
-
     img.addEventListener("click", () => {
       this.mostrarSeleccion();
     });
   }
 
-  /* RESULTADO  */
+  /* RESULTADO */
 
   comprobarResultado(maleta) {
     if (maleta.esCorrecta()) {
@@ -311,7 +314,7 @@ textoContainer.appendChild(botonesContainer);
   }
 }
 
-/*  INICIO                 */
+/* INICIO */
 
 export function iniciarReto3() {
   const juego = new JuegoReto3();
