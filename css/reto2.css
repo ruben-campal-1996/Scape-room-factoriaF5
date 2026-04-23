@@ -6,9 +6,9 @@ display: flex;
 flex-direction: column;
 align-items: center;
 text-align: center;
-min-height: 100vh;
+width: 100%;
 color: var(--color-text-main);
-gap: 1rem;
+gap: 7rem;
 
 }
 .content-container {
@@ -104,10 +104,11 @@ background-color: var(--color-primary);
 
 .img-container {
   position: relative;
-  margin-top: 20vh;
-  z-index: 9999;
+  margin-top: 15vh;
+  z-index: 1;
   display: inline-block;
-  min-width: 80vh;
+  width: 100%;
+  max-width: 600px;
 }
 
 .img-container::after{
@@ -152,7 +153,7 @@ background-color: var(--color-primary);
 
 .seleccionado {
   transform: scale(1.2);
-  outline: 3px solid lime;
+  outline: 3px solid var(--color-primary);
 }
 
 .hidden {
@@ -297,7 +298,7 @@ background-color: var(--color-primary);
 
 .seleccionado {
   transform: scale(1.6);
-  outline: 3px solid lime;
+  outline: 3px solid var(--color-primary);
 }
 
 .content-container {
@@ -313,7 +314,7 @@ background-color: var(--color-primary);
   position: relative;
   margin-left: var(--space-md);
   text-align: center;
-  z-index: 50;
+  z-index: 10;
   }
 
   .textContainer h1 {
