@@ -93,6 +93,7 @@ document.head.appendChild(link)
 
     const hero = document.getElementById("reto")
     const divGeneral = crearDiv("","general-container")
+    divGeneral.classList.add("p2")
     const divImg = crearDiv("","img-container")
     divImg.classList.add("overlay")
     const divImgItems = crearDiv("","img-items-container")
