@@ -87,6 +87,8 @@ export function reto1() {
     const inputsContainer = document.createElement("div");
     inputsContainer.classList.add("codigo-container");
 
+    const beep = document.getElementById("beep-sound");
+
     for (let i = 0; i < 4; i++) {
       const cont = document.createElement("div");
       cont.classList.add("digit-container");
@@ -111,6 +113,7 @@ export function reto1() {
         valor = (valor + 1) % 10;
         display.textContent = valor;
         display.focus();
+        beep.play();
         });
 
       // 🔽 BAja
@@ -118,6 +121,7 @@ export function reto1() {
         valor = (valor - 1 + 10) % 10;
         display.textContent = valor;
         display.focus();
+        beep.play();
       });
 
       // ⌨️ TECLADO
@@ -134,6 +138,7 @@ export function reto1() {
         }
 
         e.preventDefault();
+        beep.play();
       });
 
       cont.appendChild(up);
@@ -164,6 +169,8 @@ export function reto1() {
         const correcto = document.createElement("h1");
         correcto.textContent = "¡CÓDIGO CORRECTO!";
         correcto.classList.add("correcto-texto");
+        const sound_open = document.getElementById("open-sound");
+        sound_open.play();
 
         const botonOk = document.createElement("button");
         botonOk.textContent = "SIGUIENTE";
@@ -200,6 +207,8 @@ export function reto1() {
         const incorrecto = document.createElement("h1"); /* todos son h1*/
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
         incorrecto.classList.add("error-texto");
+        const wrong_key = document.getElementById("wrong-sound");
+        wrong_key.play();
 
         const botonReintentar = document.createElement("button");
         botonReintentar.textContent = "REINTENTAR";

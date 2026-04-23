@@ -29,6 +29,7 @@ function mostrarFinalBueno() {
   a_return.className = "btn-return";
   a_return.textContent = "Volver al inicio.";
   contentContainer.appendChild(a_return);
+  
 }
 
 function mostrarFinalMalo() {
@@ -52,6 +53,11 @@ function mostrarFinalMalo() {
   a_return.className = "btn-return";
   a_return.textContent = "Volver al inicio.";
   contentContainer.appendChild(a_return);
+  const audioDerrota = document.createElement("audio");
+  audioDerrota.src = "/assets/themes/zombie-sound.mp3";
+  audioDerrota.id = "audio-derrota";
+  audioDerrota.preload = "auto";
+  audioDerrota.play();
 }
 
 if(estado == "ganado") {

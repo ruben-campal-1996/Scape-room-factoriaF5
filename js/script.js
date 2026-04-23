@@ -17,5 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (contenedor) {
     reto1();
+
+import { volumen } from "./volume.js";
+
+volumen();
   }
 });
