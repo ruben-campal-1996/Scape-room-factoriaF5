@@ -36,12 +36,12 @@ class JuegoReto3 {
       new Maleta(
         1,
         "../assets/img/resources/maleta-abierta.png",
-        "Portátil, Auriculares y mouse...Siempre hay tiempo para analizar código, ¿no?",
+        "Portátil, Auriculares y manual de git...Siempre hay tiempo para analizar código, ¿no?",
         false,
         [
           "../assets/img/resources/portatil.png",
           "../assets/img/resources/auriculares.png",
-          "../assets/img/resources/mouse.png",
+          "../assets/img/resources/libro-sagrado.png",
         ],
       ),
       new Maleta(
@@ -163,7 +163,7 @@ document.addEventListener("touchmove", this._touchHandler);
 
   mostrarSeleccion() {
     this.contenedor.innerHTML = "";
-    this.contenedor.className = "pantalla-contexto";
+    this.contenedor.className = "pantalla-contexto pantalla-seleccion";
 
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("sala-fondo");
@@ -223,7 +223,7 @@ document.addEventListener("touchmove", this._touchHandler);
    this.desactivarProximidad();
 
     this.contenedor.innerHTML = "";
-    this.contenedor.className = "pantalla-contexto";
+    this.contenedor.className = "pantalla-contexto pantalla-maleta";
 
     
   
@@ -253,6 +253,7 @@ maleta.objetos.forEach((ruta, i) => {
   objetosContainer.appendChild(obj);
 });
 
+
 maletaWrapper.appendChild(objetosContainer);
 
 maletaWrapper.appendChild(objetosContainer);
@@ -281,9 +282,14 @@ maletaWrapper.appendChild(objetosContainer);
       this.comprobarResultado(maleta);
     });
 
-    textoContainer.appendChild(texto);
-    textoContainer.appendChild(botonElegir);
-    textoContainer.appendChild(botonVolver);
+const botonesContainer = document.createElement("div");
+botonesContainer.classList.add("boton-container");
+
+botonesContainer.appendChild(botonElegir);
+botonesContainer.appendChild(botonVolver);
+
+textoContainer.appendChild(texto);
+textoContainer.appendChild(botonesContainer);
 
     this.contenedor.appendChild(imgContainer);
     this.contenedor.appendChild(textoContainer);
