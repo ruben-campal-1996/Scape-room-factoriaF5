@@ -179,16 +179,21 @@
 }
 .objetos-container {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+ width: 20%;
+  height: 100%;
 display:flex;
  justify-content: center;
-  align-items: center;
- flex-wrap: nowrap;  
+  align-items: flex-end;
+ flex-wrap: nowwrap;
+ gap: 8%;  
 }
-.objeto img{
+.objeto{
+    width: 10%;
+    max-width: 30px;
+  height: auto;
   position: relative;
   object-fit: contain;
    transform: translateY(10px) scale(0.8);
@@ -199,18 +204,6 @@ display:flex;
 .objeto:hover {
   transform: scale(1.2);
   filter: brightness(1.3);
-}
-
-.objeto:nth-child(1) {
-  transform: translateY(5px);
-}
-
-.objeto:nth-child(2) {
-  transform: translateY(-3px);
-}
-
-.objeto:nth-child(3) {
-  transform: translateY(8px);
 }
 
 
