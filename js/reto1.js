@@ -5,16 +5,11 @@ import { iniciarReto3 } from "./reto3.js"; /* PARA ENLAZAR LOS RETOS ENTRE ELLOS
 
 export function reto1() {
   const contenedor = document.getElementById("reto");
+  const btnAbandonar = document.getElementById("abandonar");
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const btnAbandonar = document.getElementById("abandonar");
-
-    if (btnAbandonar) {
-      btnAbandonar.addEventListener("click", abandonarJuego);
-    }
-  }); // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
- 
-
+  if (btnAbandonar) {
+    btnAbandonar.addEventListener("click", abandonarJuego);
+  }
   iniciarJuego();
 
   contenedor.innerHTML = "";
@@ -61,7 +56,7 @@ export function reto1() {
     operacion1.textContent = "(8 - 5) x 4";
 
     const operacion2 = document.createElement("p");
-    operacion2.textContent = "(24 ÷ 3) + (4 x 6)";
+    operacion2.textContent = "(24 ÷ 3) + (13 x 2)";
 
     // 🔹 INPUTS
     // const inputsContainer = document.createElement("div");
@@ -85,6 +80,8 @@ export function reto1() {
 
     const inputsContainer = document.createElement("div");
     inputsContainer.classList.add("codigo-container");
+
+    const beep = document.getElementById("beep-sound");
 
     for (let i = 0; i < 4; i++) {
       const cont = document.createElement("div");
@@ -110,6 +107,7 @@ export function reto1() {
         valor = (valor + 1) % 10;
         display.textContent = valor;
         display.focus();
+        beep.play();
         });
 
       // 🔽 BAja
@@ -117,6 +115,7 @@ export function reto1() {
         valor = (valor - 1 + 10) % 10;
         display.textContent = valor;
         display.focus();
+        beep.play();
       });
 
       // ⌨️ TECLADO
@@ -133,6 +132,7 @@ export function reto1() {
         }
 
         e.preventDefault();
+        beep.play();
       });
 
       cont.appendChild(up);
@@ -163,6 +163,8 @@ export function reto1() {
         const correcto = document.createElement("h1");
         correcto.textContent = "¡CÓDIGO CORRECTO!";
         correcto.classList.add("correcto-texto");
+        const sound_open = document.getElementById("open-sound");
+        sound_open.play();
 
         const botonOk = document.createElement("button");
         botonOk.textContent = "SIGUIENTE";
@@ -199,6 +201,8 @@ export function reto1() {
         const incorrecto = document.createElement("h1"); /* todos son h1*/
         incorrecto.textContent = "¡CÓDIGO INCORRECTO!";
         incorrecto.classList.add("error-texto");
+        const wrong_key = document.getElementById("wrong-sound");
+        wrong_key.play();
 
         const botonReintentar = document.createElement("button");
         botonReintentar.textContent = "REINTENTAR";

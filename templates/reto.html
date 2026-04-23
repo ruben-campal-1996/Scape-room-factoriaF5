@@ -5,17 +5,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="..../assets/img/icons/favicon-zombi.png">
-  <link rel="apple-touch-icon" href="../assets/img/icons/favicon-zombi.png">
   <link rel="icon" href="../assets/img/icons/favicon-zombi.png">
-  <link rel="apple-touch-icon" href="..../assets/img/icons/favicon-zombi.png">
+  <link rel="apple-touch-icon" href="../assets/img/icons/favicon-zombi.png">
   <title>Scape&Play</title>
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/reto3.css">
   <link rel="stylesheet" href="../css/reto1.css">
-  <link rel="stylesheet" href="../css/reto2.css">
-  <link rel="stylesheet" href="../css/reto3.css">
+
 </head>
 
 
@@ -48,6 +45,20 @@
     </div>
 
     </section>
+    <div class="audio-menu">
+        <button id="audio-toggle" class="audio-icon">🔊</button>
+        <div id="volume-container" class="volume-slider-container">
+            <input type="range" id="volume-control" min="0" max="1" step="0.01" value="0.01">
+        </div>
+        </div>
+        <!-- https://www.youtube.com/watch?v=PClFR0o2iPE -->
+        <audio id="bg-music" autoplay loop>
+            <source src="/assets/themes/Behind_The_Heavy_Gate.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+    <audio id="beep-sound" src="/assets/themes/button_digital.mp3" preload="auto"></audio>
+    <audio id="open-sound" src="/assets/themes/open_door.mp3" preload="auto"></audio>
+    <audio id="wrong-sound" src="/assets/themes/wrong_key.mp3" preload="auto"></audio>
     </main>
     <footer id="footer">
         <p>© 2006 Scape&Play. Todos los derechos reservados.</p>
