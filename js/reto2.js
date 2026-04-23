@@ -43,7 +43,11 @@ function crearTexto(tag,texto) {
 export function reto2Contexto() {
     const main = document.querySelector("main")
 
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "../css/reto2.css"
 
+document.head.appendChild(link)
 
     const hero = document.getElementById("reto")
     const divGeneral = crearDiv("", "general-container")
@@ -80,10 +84,17 @@ export function reto2Contexto() {
 // PRUEBA RETO 2
 function reto2Prueba() {
     const main = document.querySelector("main")
+    
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "../css/reto2.css"
+
+document.head.appendChild(link)
 
     const hero = document.getElementById("reto")
     const divGeneral = crearDiv("","general-container")
     const divImg = crearDiv("","img-container")
+    divImg.classList.add("overlay")
     const divImgItems = crearDiv("","img-items-container")
     const textContainer = crearDiv("", "textContainer")
     const imgMesa = crearImagen("../assets/img/resources/mesa-vacia.png", "Imagen de una mesa", "img-mesa")
@@ -117,6 +128,7 @@ function reto2Prueba() {
             correcto: false
         }
     ]
+
 // ---LÓGICA E IMPLEMENTACIÓN DE IMAGENES---
     let objetoSeleccionado = null;
     let seleccionBloqueada = false;

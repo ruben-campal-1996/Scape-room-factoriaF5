@@ -1,4 +1,6 @@
 import { reto1 } from "./reto1.js";
+import { volumen } from "./volume.js";
+
 const nav = document.querySelector("#nav");
 const abrir = document.querySelector("#open");
 const cerrar = document.querySelector("#close");
@@ -17,9 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (contenedor) {
     reto1();
-
-import { volumen } from "./volume.js";
-
-volumen();
+    volumen();
   }
 });
