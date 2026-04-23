@@ -56,7 +56,7 @@ export function reto1() {
     operacion1.textContent = "(8 - 5) x 4";
 
     const operacion2 = document.createElement("p");
-    operacion2.textContent = "(24 ÷ 3) + (4 x 6)";
+    operacion2.textContent = "(24 ÷ 3) + (13 x 2)";
 
     // 🔹 INPUTS
     // const inputsContainer = document.createElement("div");
