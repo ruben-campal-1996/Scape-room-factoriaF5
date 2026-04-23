@@ -1,5 +1,8 @@
 @import url(style.css);
-
+#reto {
+  display: flex;
+  padding: 0;
+}
 
 .general-container {
 display: flex;
@@ -8,8 +11,10 @@ align-items: center;
 text-align: center;
 width: 100%;
 color: var(--color-text-main);
-gap: 7rem;
-
+gap: 2rem;
+}
+.general-container.p2 {
+  gap:7rem
 }
 .content-container {
   display: flex;
@@ -29,6 +34,7 @@ gap: 7rem;
   .textContainer h1 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
+  margin: 1rem;
 }
 
 .textContainer button {
@@ -60,8 +66,12 @@ background-color: var(--color-primary);
 }
 
 .img-container-r2 {
-    height: auto;
-    padding: var(--space-md);
+  width: fit-content;  
+  height: auto;
+}
+
+.img-container-r2 img {
+  width: 100%;
 }
 
 .p-container{
@@ -104,14 +114,13 @@ background-color: var(--color-primary);
 
 .img-container {
   position: relative;
-  margin-top: 15vh;
+  margin-top: 10rem;
   z-index: 1;
   display: inline-block;
-  width: 100%;
-  max-width: 600px;
+  width: fit-content;
 }
 
-.img-container::after{
+.img-container.overlay::after{
   content: "";
   position: absolute;
   inset: 0;
@@ -123,14 +132,13 @@ background-color: var(--color-primary);
 
 .img-mesa {
   display: block;
-  width: 100%;
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(1.4);
 }
 .img-items-container {
   position: absolute;
-  bottom: 50vh;
-  left: 35vh;
-  width: 3.5rem;
+  bottom: 35vh;
+  left: 20vh;
+  width: 2.5rem;
   height: 10%;
   z-index: 11;
   display: flex;
@@ -209,13 +217,17 @@ background-color: var(--color-primary);
   transform: scale(0.95);
 }
 
+/* ---MEDIAQUERIE--- */
+
 @media (min-width: 1024px) {
 .general-container {
-  
+  display: flex;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 7rem;
   text-align: left;
+  
 }
 
 .img-container-r2 {
@@ -235,19 +247,11 @@ background-color: var(--color-primary);
 
 .img-container {
   position: relative;
-  top: 0vh;
   z-index: 10;
   display: inline-block;
-  min-width: 80vh;
 }
 
-.img-container::after{
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index:10;
-  pointer-events: none;
+.img-container.overlay::after{
   transform: rotate(0deg);
 }
 
@@ -258,8 +262,8 @@ background-color: var(--color-primary);
 }
 .img-items-container {
   position: absolute;
-  bottom: 22vh;
-  left: 34vh;
+  bottom: 20vh;
+  left: 40vh;
   width: 40%;
   height: 50%;
   z-index: 11;
@@ -277,15 +281,15 @@ background-color: var(--color-primary);
 }
 
 .item.lupa {
-  width: 15%;
-  height: 20%;
-  top: 5rem;
+  width: 25%;
+  height: 30%;
+  top: 2rem;
 }
 
 .item.jeringuilla {
-  width: 30%;
-  height: 30%;
-  top: 15rem;
+  width: 40%;
+  height: 40%;
+  top: 7rem;
 }
 
 .item.probeta {
@@ -320,6 +324,7 @@ background-color: var(--color-primary);
   .textContainer h1 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h1);
+  margin: 0;
 }
 
 .textContainer button {
