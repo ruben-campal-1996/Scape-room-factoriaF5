@@ -1,4 +1,6 @@
 import { reto1 } from "./reto1.js";
+import { abandonar } from "./salir.js";
+import { abandonarJuego } from "./temporizador.js";
 import { volumen } from "./volume.js";
 
 const nav = document.querySelector("#nav");
@@ -20,5 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contenedor) {
     reto1();
     volumen();
+    
   }
 });
