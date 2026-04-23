@@ -14,9 +14,28 @@
   padding: 20px;
 }
 
-/* ========================= */
-/* SALA DE MALETAS  
-/* ========================= */
+
+/* SALA DE MALETAS  */
+
+.sala-fondo {
+  width: 100%;
+  height: 70vh;
+  position: relative;
+  background-image: url("../assets/img/resources/habitacion.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.sala-fondo::after {
+  /* Oscurece un poco la pantalla*/
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
 
 .imagen-container {
   width: 100%;
@@ -27,50 +46,41 @@
   overflow: hidden;
 }
 
-.imagen-container img {
-  width: 100%;
-  display: block;
-  border-radius: 20px;
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.mapa {
-  position: relative;
+.fade-in {
+  opacity: 1;
+  animation: fadeIn 0.3s ease;
 }
 
-/* zonas invisibles clicables */
-.zona-maleta {
-  position: absolute;
-  width: 100px;
-  height: 80px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  z-index: 10; 
-    background: rgba(255, 0, 0, 0.3);
-}
-
-/* hover efecto pro */
-.zona-maleta:hover {
-  outline: 3px solid rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  transform: scale(1.05);
-}
-
-/* ========================= */
-/*  TEXTO 
-/* ========================= */
-
+/*  TEXTO */
 .texto {
-  width: 100%;
-  max-width: 800px;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
 
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
+  width: 90%;
+  max-width: 90%;
 
-  border-radius: 20px;
-  padding: 20px;
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.4));
 
+  border-radius: 10px;
+  padding: 12px 14px;
   text-align: center;
-  color: white;
+
+  font-size: 1rem;
+  line-height: 1.5;
+
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: aparecerHUD 0.5s ease;
+  border-left: 4px solid var(--color-primary);
+  z-index: 10;
 }
 
 .texto h2 {
@@ -78,12 +88,10 @@
 }
 
 .texto p {
-  line-height: 1.5;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
 }
 
-/* ========================= */
-/*  BOTONES 
-/* ========================= */
+/*  BOTONES*/
 
 .boton-container {
   display: flex;
@@ -91,27 +99,67 @@
   gap: 15px;
 }
 
-/* reutiliza tu estilo existente */
-.btn-rojo , .btnVolver{
-  background-color: #b30000;
-  color: white;
+.btn-secundario {
+  background-color: var(--color-primary);
+  color: var(--color-text-main);
 
-  padding: 12px 25px;
-  border-radius: 20px;
+  padding: 14px 40px;
   border: none;
+  border-radius: 30px;
+
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
 
   cursor: pointer;
-  transition: 0.3s;
+
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
 }
 
-.btn-rojo , .btnVolver :hover {
-  background-color: #ff0000;
+.btn-secundario:hover {
+  background-color: var(--color-hover);
   transform: scale(1.05);
 }
 
-/* ========================= */
-/* 🧳 MALETA ABIERTA */
-/* ========================= */
+.btn-secundario:active {
+  background-color: #2B2B2B;
+  transform: scale(0.95);
+}
+
+
+/*  MALETAS */
+
+.maletas-wrapper {
+  position: relative;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.maleta {
+  width: 70px;
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform 0.15s linear, filter 0.15s linear;
+  touch-action: manipulation;
+}
+
+
+.maleta-proxima {
+  filter: brightness(1.4) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+}
+
+.maleta-open-img {
+  position: relative;
+  width: 100%;
+  display: block;
+  animation: abrirMaleta 0.4s ease;
+}
 
 #maletaImg {
   cursor: pointer;
@@ -119,24 +167,157 @@
 }
 
 #maletaImg:hover {
-  transform: scale(1.02);
+  transform: scale(1.1);
+}
+.maleta-wrapper {  /* MALETA ABIERTA*/
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.objetos-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+display:flex;
+ justify-content: center;
+  align-items: center;
+ flex-wrap: nowrap;  
+}
+.objeto img{
+  position: relative;
+  object-fit: contain;
+   transform: translateY(10px) scale(0.8);
+ transition: transform 0.2s ease;
+  opacity: 0;
+  animation: aparecerObjeto 0.4s ease forwards;
+}
+.objeto:hover {
+  transform: scale(1.2);
+  filter: brightness(1.3);
 }
 
-/* ========================= */
-/* 🎬 ANIMACIONES (OPCIONAL) */
-/* ========================= */
+.objeto:nth-child(1) {
+  transform: translateY(5px);
+}
+
+.objeto:nth-child(2) {
+  transform: translateY(-3px);
+}
+
+.objeto:nth-child(3) {
+  transform: translateY(8px);
+}
+
+
+/* ANIMACIONES */
+@keyframes abrirMaleta {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes aparecerObjeto {
+  to {
+    opacity: 1;
+   transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes aparecerHUD {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: scale(0.98);
   }
+
   to {
     opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
     transform: scale(1);
   }
 }
 
 .pantalla-maletas {
   animation: fadeIn 0.3s ease;
+
+}
+
+/* MEDIA QUERIES */
+
+@media (min-width: 768px) {
+  /*TABLET*/
+
+  .sala-fondo {
+    height: 80vh;
+  }
+
+  .maleta {
+    width: 80px;
+  }
+
+  .texto {
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  /*DESKTOP*/
+
+  .pantalla-contexto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sala-fondo {
+    height: 85vh;
+    max-width: 1000px;
+    border-radius: 20px;
+  }
+
+  .texto {
+    bottom: 30px;
+    max-width: 700px;
+
+    font-size: 1.1rem;
+    padding: 18px 24px;
+  }
+
+  .maleta {
+    width: 100px;
+  }
 }

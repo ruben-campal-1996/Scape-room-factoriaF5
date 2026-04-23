@@ -1,186 +1,317 @@
 import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
-export function iniciarReto3() {
-  const contenedor = document.getElementById("reto"); //Cambiarlo por reto 2 en cuanto este
 
-  /* ========================= */
-  /*  PRIMERA PANTALLA         */
-  /* ========================= */
+/*  CLASE MALETA           */
 
-  contenedor.innerHTML = "";
-  contenedor.className = "pantalla-contexto"; // 👈 reutilizamos lo que se ha creado en reto1.js
+class Maleta {
+  constructor(id, imagen, texto, correcta, objetos) {
+    this.id = id;
+    this.imagen= imagen;
+    this.texto = texto;
+    this.correcta = correcta;
+    this.objetos = objetos;
+  }
 
-  //IMAGEN AGARRAMOS LOS CONTENEDORES Y LOS MODIFICAMOS
-  const imgContainer = document.createElement("div");
-  imgContainer.classList.add("img-container");
+  esCorrecta() {
+    return this.correcta;
+  }
+}
+/* CLASE JUEGO  */
 
-  const img = document.createElement("img");
-  img.src = "../assets/img/resources/victoria.png";
-  imgContainer.appendChild(img);
+class JuegoReto3 {
+  constructor() {
+    this.contenedor = document.getElementById("reto-1");
 
-  //TEXTO
-  const textoContainer = document.createElement("div");
-  textoContainer.classList.add("texto-container");
+    this.maletas = [
+      new Maleta(
+        0,
+        "../assets/img/resources/maleta-abierta.png",
+        "Toalla, gameboy y crema solar... Lamentablemente no tenemos tiempo de broncearnos en la playa.",
+        false,
+        [
+          "../assets/img/resources/toalla.png",
+          "../assets/img/resources/gameboy.png",
+          "../assets/img/resources/crema.png",
+        ],
+      ),
+      new Maleta(
+        1,
+        "../assets/img/resources/maleta-abierta.png",
+        "Portátil, Auriculares y mouse...Siempre hay tiempo para analizar código, ¿no?",
+        false,
+        [
+          "../assets/img/resources/portatil.png",
+          "../assets/img/resources/auriculares.png",
+          "../assets/img/resources/mouse.png",
+        ],
+      ),
+      new Maleta(
+        2,
+        "../assets/img/resources/maleta-abierta.png",
+        "Cuchillo, manual de supervivencia(¡Qué oportuno!) y cantimplora",
+        true,
+        [
+          "../assets/img/resources/cuchillo.png",
+          "../assets/img/resources/manual.png",
+          "../assets/img/resources/cantimplora.png",
+        ],
+      ),
+    ];
+  }
+  activarProximidad() {
+  if (this.proximidadActiva) return;
+  this.proximidadActiva = true;
 
-  const titulo = document.createElement("h1");
-  titulo.textContent = "¡ESTAS MAMADÍSIMO!";
 
-  const texto = document.createElement("p");
-  texto.innerHTML = `
-        Una pena que nadie haya podido ver tu heroicidad...
+
+    const maletas = document.querySelectorAll(".maleta");
+
+    const handler = (x, y) => {
+      maletas.forEach((maleta) => {
+        const rect = maleta.getBoundingClientRect();
+
+        const centroX = rect.left + rect.width / 2;
+        const centroY = rect.top + rect.height / 2;
+
+        const dx = x - centroX;
+        const dy = y - centroY;
+
+        const distancia = Math.sqrt(dx * dx + dy * dy);
+        const maxDist = 180;
+
+        if (distancia < maxDist) {
+          const intensidad = 1 - distancia / maxDist;
+
+          maleta.style.transform = `
+  scale(${1 + intensidad * 0.4})
+`;
+
+          maleta.style.filter = `
+          brightness(${1 + intensidad * 0.5})
+          drop-shadow(0 0 ${intensidad * 20}px rgba(255,255,255,0.6))
+        `;
+        } else {
+          maleta.style.transform = "scale(1)";
+          maleta.style.filter = "none";
+        }
+      });
+    };
+
+this._mouseHandler = (e) => handler(e.clientX, e.clientY);
+this._touchHandler = (e) => {
+  const touch = e.touches[0];
+  handler(touch.clientX, touch.clientY);
+};
+
+document.addEventListener("mousemove", this._mouseHandler);
+document.addEventListener("touchmove", this._touchHandler);
+  }
+
+  desactivarProximidad() {
+  if (!this.proximidadActiva) return;
+
+  document.removeEventListener("mousemove", this._mouseHandler);
+  document.removeEventListener("touchmove", this._touchHandler);
+
+  this.proximidadActiva = false;
+}
+
+  iniciar() {
+    this.mostrarIntro();
+  }
+
+  /* PANTALLA 1  */
+
+  mostrarIntro() {
+    this.contenedor.innerHTML = "";
+    this.contenedor.className = "pantalla-contexto";
+
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("img-container");
+
+    const img = document.createElement("img");
+    img.src = "../assets/img/resources/victoria.png";
+    imgContainer.appendChild(img);
+
+    const textoContainer = document.createElement("div");
+    textoContainer.classList.add("texto-container");
+
+    const titulo = document.createElement("h1");
+    titulo.textContent = "¡ESTAS MAMADÍSIMO!";
+
+    const texto = document.createElement("p");
+    texto.innerHTML = ` Una pena que nadie haya podido ver tu heroicidad...
         Has conseguido abrirte paso por la oleada zombie.
-        Sales de la habitación y te pones a explorar...
-  `;
+        Sales de la habitación y te pones a explorar...`;
 
-  const boton = document.createElement("button");
-  boton.textContent = "EXPLORAR SALA";
-  boton.classList.add("btn-rojo");
+    const boton = document.createElement("button");
+    boton.textContent = "EXPLORAR SALA";
+    boton.classList.add("btn-rojo");
 
-  // CAMBIO DE PANTALLA
-  boton.addEventListener("click", () => {
-    mostrarSeleccionMaletas();
-  });
+    boton.addEventListener("click", () => {
+      this.mostrarSeleccion();
+    });
 
-  //
-  textoContainer.appendChild(titulo);
-  textoContainer.appendChild(texto);
-  textoContainer.appendChild(boton);
+    textoContainer.appendChild(titulo);
+    textoContainer.appendChild(texto);
+    textoContainer.appendChild(boton);
 
-  contenedor.appendChild(imgContainer);
-  contenedor.appendChild(textoContainer);
-}
-
-/* ========================= */
-/*  SEGUNDA PANTALLA         */
-/* ========================= */
-
-function mostrarSeleccionMaletas() {
-  const contenedor = document.getElementById("reto");
-
-  contenedor.innerHTML = "";
-  contenedor.className = "pantalla-contexto";
-
-  //SALA
-  const imgContainer = document.createElement("div");
-  imgContainer.classList.add("img-container");
-
-  const img = document.createElement("img");
-  img.src = "../assets/img/resources/habitacion-maletas.png";
-  imgContainer.appendChild(img);
-
-  // ZONAS DE MALETAS
-  const zonas = [
-    { id: 0, top: "60%", left: "65%" },
-    { id: 1, top: "65%", left: "78%" },
-    { id: 2, top: "62%", left: "85%" }
-  ];
-  zonas.forEach(z => {
-    const zona = document.createElement("div");
-    zona.classList.add("zona-maleta");
-    zona.style.top = z.top;
-    zona.style.left = z.left;
-    zona.dataset.id = z.id;
-
-    zona.addEventListener("click", () => abrirMaleta(z.id));
-
-    imgContainer.appendChild(zona);
-  });
-
-  //TEXTO DENTRO DE SALA
-  const textoContainer = document.createElement("div");
-  textoContainer.classList.add("texto-container");
-
-  const texto = document.createElement("p");
-  texto.textContent = "Solo puedes llevarte una...¿Cuál es la que mejor te ayudará a sobrevivir?";
-
-
-  textoContainer.appendChild(texto);
- // MONTAJE
-  contenedor.appendChild(imgContainer);
-  contenedor.appendChild(textoContainer);
-}
-
-/* ========================= */
-/*  TERCERA PANTALLA         */
-/* ========================= */
-function abrirMaleta(id) {
-  const contenedor = document.getElementById("reto");
-
-  contenedor.innerHTML = "";
-  contenedor.className = "pantalla-contexto";
-
-  // IMAGEN MALETAS
-  const imgContainer = document.createElement("div");
-  imgContainer.classList.add("img-container");
-
-  const img = document.createElement("img");
-
-  let textoContenido = "";
-
-  if (id == 0) {
-    img.src = "../assets/img/resources/maleta-sol.png";
-    textoContenido = "Toalla, gameboy y crema solar... Lamentablemente no tenemos tiempo de broncearnos en la playa.";
+    this.contenedor.appendChild(imgContainer);
+    this.contenedor.appendChild(textoContainer);
   }
 
-  if (id == 1) {
-    img.src = "../assets/img/resources/maleta-programador.png";
-    textoContenido = "Portátil, Auriculares y mouse...Siempre hay tiempo para analizar código, ¿no?";
+  /* PANTALLA 2 */
+
+  mostrarSeleccion() {
+    this.contenedor.innerHTML = "";
+    this.contenedor.className = "pantalla-contexto";
+
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("sala-fondo");
+
+    const maletasWrapper = document.createElement("div");
+    maletasWrapper.classList.add("maletas-wrapper");
+
+    this.maletas.forEach((m) => {
+      const maleta = document.createElement("img");
+
+      maleta.src = "../assets/img/resources/maleta-cerrada.png";
+      maleta.classList.add("maleta");
+
+      maleta.addEventListener("click", () => {
+        this.animarApertura(maleta, m);
+      });
+
+      maletasWrapper.appendChild(maleta);
+    });
+
+    imgContainer.appendChild(maletasWrapper);
+
+    const textoContainer = document.createElement("div");
+    textoContainer.classList.add("texto");
+
+    const texto = document.createElement("p");
+    texto.textContent =
+      "Solo puedes llevarte una...¿Cuál es la que mejor te ayudará a sobrevivir?";
+
+    textoContainer.appendChild(texto);
+
+    imgContainer.appendChild(textoContainer);
+    this.contenedor.appendChild(imgContainer);
+    this.activarProximidad();
   }
 
-  if (id == 2) {
-    img.src = "../assets/img/resources/maleta-correcta.png";
-    textoContenido = "Cuchillo, manual de supervivencia(¡Qué oportuno!) y cantimplora";
+  animarApertura(elemento, maleta) {
+    elemento.classList.add("maleta-activa");
+
+    this.contenedor.classList.add("fade-out");
+
+    setTimeout(() => {
+      this.contenedor.classList.remove("fade-out");
+
+      this.abrirMaleta(maleta);
+
+      this.contenedor.classList.add("fade-in");
+
+      setTimeout(() => {
+        this.contenedor.classList.remove("fade-in");
+      }, 400);
+    }, 300);
   }
+  /* PANTALLA 3 */
 
-  img.id = "maletaImg";
+  abrirMaleta(maleta) {
+   this.desactivarProximidad();
 
-  imgContainer.appendChild(img);
+    this.contenedor.innerHTML = "";
+    this.contenedor.className = "pantalla-contexto";
 
-  // TEXTO
-  const textoContainer = document.createElement("div");
-  textoContainer.classList.add("texto-container");
+    
+  
 
-  const texto = document.createElement("p");
-  texto.textContent = textoContenido;
+    const imgContainer = document.createElement("div");
+    imgContainer.classList.add("img-container");
 
-  //  BOTÓN ELEGIR
-  const botonElegir = document.createElement("button");
-  botonElegir.textContent = "ELEGIR ESTA MALETA";
-  botonElegir.classList.add("btn-rojo");
+    const maletaWrapper = document.createElement("div");
+    maletaWrapper.classList.add("maleta-wrapper");
 
-  //BOTON VOLVER 
-const botonVolver = document.createElement("button");
-botonVolver.textContent = "VOLVER";
-botonVolver.classList.add("btn-rojo");
+    const img = document.createElement("img");
+    img.src = "../assets/img/resources/maleta-abierta.png";
+    img.classList.add("maleta-open-img");
 
-botonVolver.addEventListener("click", () => {
-  mostrarSeleccionMaletas();
+    maletaWrapper.appendChild(img);
+
+    const posiciones = [
+  { top: "55%", left: "30%" },
+  { top: "50%", left: "50%" },
+  { top: "50%", left: "70%" }
+];
+
+const objetosContainer = document.createElement("div");
+objetosContainer.classList.add("objetos-container");
+
+maleta.objetos.forEach((ruta, i) => {
+  const obj = document.createElement("img");
+  obj.src = ruta;
+  obj.classList.add("objeto");
+
+  obj.style.animationDelay = `${i * 0.2}s`;
+
+  objetosContainer.appendChild(obj);
 });
 
-  // EVENTO ELEGIR
-  botonElegir.addEventListener("click", () => {
-    comprobarResultado(id);
-  });
+maletaWrapper.appendChild(objetosContainer);
 
-  textoContainer.appendChild(texto);
-  textoContainer.appendChild(botonElegir);
- textoContainer.appendChild(botonVolver);
+    imgContainer.appendChild(maletaWrapper);
 
-  contenedor.appendChild(imgContainer);
-  contenedor.appendChild(textoContainer);
+    const textoContainer = document.createElement("div");
+    textoContainer.classList.add("texto");
 
+    const texto = document.createElement("p");
+    texto.textContent = maleta.texto;
+
+    const botonElegir = document.createElement("button");
+    botonElegir.textContent = "ELEGIR ESTA MALETA";
+    botonElegir.classList.add("btn-rojo");
+
+    const botonVolver = document.createElement("button");
+    botonVolver.textContent = "VOLVER";
+    botonVolver.classList.add("btn-secundario");
+
+    botonVolver.addEventListener("click", () => {
+      this.mostrarSeleccion();
+    });
+
+    botonElegir.addEventListener("click", () => {
+      this.comprobarResultado(maleta);
+    });
+
+    textoContainer.appendChild(texto);
+    textoContainer.appendChild(botonElegir);
+    textoContainer.appendChild(botonVolver);
+
+    this.contenedor.appendChild(imgContainer);
+    this.contenedor.appendChild(textoContainer);
+
+    img.addEventListener("click", () => {
+      this.mostrarSeleccion();
+    });
+  }
+
+  /* RESULTADO  */
+
+  comprobarResultado(maleta) {
+    if (maleta.esCorrecta()) {
+      completarReto();
+      return;
+    }
+
+    abandonarJuego();
+  }
 }
 
+/*  INICIO                 */
 
-
-//RESULTADO
-
-  //MALETA  CORRECTA (maleta 3 -> id 2)
-function comprobarResultado(id) {
-
-  if (id == 2) {
-    completarReto(); // 🔥 ESTA ES LA CLAVE
-    return;
-  } abandonarJuego();
-
+export function iniciarReto3() {
+  const juego = new JuegoReto3();
+  juego.iniciar();
 }
-
