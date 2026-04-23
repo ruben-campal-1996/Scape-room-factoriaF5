@@ -19,7 +19,7 @@ class Maleta {
 
 class JuegoReto3 {
   constructor() {
-    this.contenedor = document.getElementById("reto-1");
+    this.contenedor = document.getElementById("reto");
 
     this.maletas = [
       new Maleta(
