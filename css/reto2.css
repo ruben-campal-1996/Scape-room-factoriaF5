@@ -14,7 +14,7 @@ color: var(--color-text-main);
 gap: 2rem;
 }
 .general-container.p2 {
-  gap:7rem
+  gap:7rem;
 }
 .content-container {
   display: flex;
@@ -225,9 +225,11 @@ background-color: var(--color-primary);
   flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
-  gap: 7rem;
-  text-align: left;
-  
+  gap: 1rem;
+  text-align: left; 
+}
+.general-container.p2 {
+  gap: 1rem;
 }
 
 .img-container-r2 {
