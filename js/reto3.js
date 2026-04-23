@@ -3,11 +3,12 @@ import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 /*  CLASE MALETA           */
 
 class Maleta {
-  constructor(id, imagen, texto, correcta) {
+  constructor(id, imagen, texto, correcta, objetos) {
     this.id = id;
-    this.imagen = imagen;
+    this.imagen= imagen;
     this.texto = texto;
     this.correcta = correcta;
+    this.objetos = objetos;
   }
 
   esCorrecta() {
@@ -23,25 +24,45 @@ class JuegoReto3 {
     this.maletas = [
       new Maleta(
         0,
-        "../assets/img/resources/maleta-sol.png",
+        "../assets/img/resources/maleta-abierta.png",
         "Toalla, gameboy y crema solar... Lamentablemente no tenemos tiempo de broncearnos en la playa.",
         false,
+        [
+          "../assets/img/resources/toalla.png",
+          "../assets/img/resources/gameboy.png",
+          "../assets/img/resources/crema.png",
+        ],
       ),
       new Maleta(
         1,
-        "../assets/img/resources/maleta-programador.png",
+        "../assets/img/resources/maleta-abierta.png",
         "Portátil, Auriculares y mouse...Siempre hay tiempo para analizar código, ¿no?",
         false,
+        [
+          "../assets/img/resources/portatil.png",
+          "../assets/img/resources/auriculares.png",
+          "../assets/img/resources/mouse.png",
+        ],
       ),
       new Maleta(
         2,
-        "../assets/img/resources/maleta-correcta.png",
+        "../assets/img/resources/maleta-abierta.png",
         "Cuchillo, manual de supervivencia(¡Qué oportuno!) y cantimplora",
         true,
+        [
+          "../assets/img/resources/cuchillo.png",
+          "../assets/img/resources/manual.png",
+          "../assets/img/resources/cantimplora.png",
+        ],
       ),
     ];
   }
   activarProximidad() {
+  if (this.proximidadActiva) return;
+  this.proximidadActiva = true;
+
+
+
     const maletas = document.querySelectorAll(".maleta");
 
     const handler = (x, y) => {
@@ -69,21 +90,30 @@ class JuegoReto3 {
           drop-shadow(0 0 ${intensidad * 20}px rgba(255,255,255,0.6))
         `;
         } else {
-          maleta.style.transform = "translate(-50%, -50%) scale(1)";
+          maleta.style.transform = "scale(1)";
           maleta.style.filter = "none";
         }
       });
     };
 
-    document.addEventListener("mousemove", (e) => {
-      handler(e.clientX, e.clientY);
-    });
+this._mouseHandler = (e) => handler(e.clientX, e.clientY);
+this._touchHandler = (e) => {
+  const touch = e.touches[0];
+  handler(touch.clientX, touch.clientY);
+};
 
-    document.addEventListener("touchmove", (e) => {
-      const touch = e.touches[0];
-      handler(touch.clientX, touch.clientY);
-    });
+document.addEventListener("mousemove", this._mouseHandler);
+document.addEventListener("touchmove", this._touchHandler);
   }
+
+  desactivarProximidad() {
+  if (!this.proximidadActiva) return;
+
+  document.removeEventListener("mousemove", this._mouseHandler);
+  document.removeEventListener("touchmove", this._touchHandler);
+
+  this.proximidadActiva = false;
+}
 
   iniciar() {
     this.mostrarIntro();
@@ -190,17 +220,48 @@ class JuegoReto3 {
   /* PANTALLA 3 */
 
   abrirMaleta(maleta) {
+   this.desactivarProximidad();
+
     this.contenedor.innerHTML = "";
     this.contenedor.className = "pantalla-contexto";
+
+    
+  
 
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("img-container");
 
-    const img = document.createElement("img");
-    img.src = maleta.imagen;
-    img.id = "maletaImg";
+    const maletaWrapper = document.createElement("div");
+    maletaWrapper.classList.add("maleta-wrapper");
 
-    imgContainer.appendChild(img);
+    const img = document.createElement("img");
+    img.src = "../assets/img/resources/maleta-abierta.png";
+    img.classList.add("maleta-open-img");
+
+    maletaWrapper.appendChild(img);
+
+    const posiciones = [
+  { top: "55%", left: "30%" },
+  { top: "50%", left: "50%" },
+  { top: "50%", left: "70%" }
+];
+
+const objetosContainer = document.createElement("div");
+objetosContainer.classList.add("objetos-container");
+
+maleta.objetos.forEach((ruta, i) => {
+  const obj = document.createElement("img");
+  obj.src = ruta;
+  obj.classList.add("objeto");
+
+  obj.style.animationDelay = `${i * 0.2}s`;
+
+  objetosContainer.appendChild(obj);
+});
+
+maletaWrapper.appendChild(objetosContainer);
+
+    imgContainer.appendChild(maletaWrapper);
 
     const textoContainer = document.createElement("div");
     textoContainer.classList.add("texto");
