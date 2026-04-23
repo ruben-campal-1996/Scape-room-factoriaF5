@@ -5,7 +5,7 @@ import { iniciarJuego, completarReto, abandonarJuego } from "./temporizador.js";
 class Maleta {
   constructor(id, imagen, texto, correcta, objetos) {
     this.id = id;
-    this.imagen= imagen;
+    this.imagen = imagen;
     this.texto = texto;
     this.correcta = correcta;
     this.objetos = objetos;
@@ -58,10 +58,8 @@ class JuegoReto3 {
     ];
   }
   activarProximidad() {
-  if (this.proximidadActiva) return;
-  this.proximidadActiva = true;
-
-
+    if (this.proximidadActiva) return;
+    this.proximidadActiva = true;
 
     const maletas = document.querySelectorAll(".maleta");
 
@@ -96,24 +94,24 @@ class JuegoReto3 {
       });
     };
 
-this._mouseHandler = (e) => handler(e.clientX, e.clientY);
-this._touchHandler = (e) => {
-  const touch = e.touches[0];
-  handler(touch.clientX, touch.clientY);
-};
+    this._mouseHandler = (e) => handler(e.clientX, e.clientY);
+    this._touchHandler = (e) => {
+      const touch = e.touches[0];
+      handler(touch.clientX, touch.clientY);
+    };
 
-document.addEventListener("mousemove", this._mouseHandler);
-document.addEventListener("touchmove", this._touchHandler);
+    document.addEventListener("mousemove", this._mouseHandler);
+    document.addEventListener("touchmove", this._touchHandler);
   }
 
   desactivarProximidad() {
-  if (!this.proximidadActiva) return;
+    if (!this.proximidadActiva) return;
 
-  document.removeEventListener("mousemove", this._mouseHandler);
-  document.removeEventListener("touchmove", this._touchHandler);
+    document.removeEventListener("mousemove", this._mouseHandler);
+    document.removeEventListener("touchmove", this._touchHandler);
 
-  this.proximidadActiva = false;
-}
+    this.proximidadActiva = false;
+  }
 
   iniciar() {
     this.mostrarIntro();
@@ -220,13 +218,10 @@ document.addEventListener("touchmove", this._touchHandler);
   /* PANTALLA 3 */
 
   abrirMaleta(maleta) {
-   this.desactivarProximidad();
+    this.desactivarProximidad();
 
     this.contenedor.innerHTML = "";
     this.contenedor.className = "pantalla-contexto pantalla-maleta";
-
-    
-  
 
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("img-container");
@@ -240,23 +235,22 @@ document.addEventListener("touchmove", this._touchHandler);
 
     maletaWrapper.appendChild(img);
 
-const objetosContainer = document.createElement("div");
-objetosContainer.classList.add("objetos-container");
+    const objetosContainer = document.createElement("div");
+    objetosContainer.classList.add("objetos-container");
 
-maleta.objetos.forEach((ruta, i) => {
-  const obj = document.createElement("img");
-  obj.src = ruta;
-  obj.classList.add("objeto");
+    maleta.objetos.forEach((ruta, i) => {
+      const obj = document.createElement("img");
+      obj.src = ruta;
+      obj.classList.add("objeto");
 
-  obj.style.animationDelay = `${i * 0.15}s`;
+      obj.style.animationDelay = `${i * 0.15}s`;
 
-  objetosContainer.appendChild(obj);
-});
+      objetosContainer.appendChild(obj);
+    });
 
+    maletaWrapper.appendChild(objetosContainer);
 
-maletaWrapper.appendChild(objetosContainer);
-
-maletaWrapper.appendChild(objetosContainer);
+    maletaWrapper.appendChild(objetosContainer);
 
     imgContainer.appendChild(maletaWrapper);
 
@@ -282,14 +276,14 @@ maletaWrapper.appendChild(objetosContainer);
       this.comprobarResultado(maleta);
     });
 
-const botonesContainer = document.createElement("div");
-botonesContainer.classList.add("boton-container");
+    const botonesContainer = document.createElement("div");
+    botonesContainer.classList.add("boton-container");
 
-botonesContainer.appendChild(botonElegir);
-botonesContainer.appendChild(botonVolver);
+    botonesContainer.appendChild(botonElegir);
+    botonesContainer.appendChild(botonVolver);
 
-textoContainer.appendChild(texto);
-textoContainer.appendChild(botonesContainer);
+    textoContainer.appendChild(texto);
+    textoContainer.appendChild(botonesContainer);
 
     this.contenedor.appendChild(imgContainer);
     this.contenedor.appendChild(textoContainer);
@@ -305,9 +299,7 @@ textoContainer.appendChild(botonesContainer);
     if (maleta.esCorrecta()) {
       completarReto();
       return;
-    }
-
-    abandonarJuego();
+    } abandonarJuego();
   }
 }
 

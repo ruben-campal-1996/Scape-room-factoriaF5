@@ -99,17 +99,30 @@ background-color: var(--color-primary);
 }
 
 .btn-start-r2 {
-    padding: 14px 40px;
-    border-radius: 12px;
-    background-color: var(--color-primary);
-    width: fit-content;
-    margin: 0 auto;
+  order: 1;
+  background-color: var(--color-primary);
+  color: var(--color-text-main);
 
-    margin-bottom: 1rem;
 
-    color: inherit;
-    font-family: inherit;
-    font-size: var(--font-size-p);
+  padding: 14px 40px;
+  border: none;
+  border-radius: 30px;
+
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-medium);
+
+  cursor: pointer;
+
+  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+  transition: all 0.2s ease;
+}
+.btn-start-r2 :hover{
+    background-color: var(--color-hover);
+  transform: scale(1.05);
+}
+.btn-start-r2 :active{
+    background-color: #2B2B2B;
+  transform: scale(0.95);
 }
 
 .img-container {

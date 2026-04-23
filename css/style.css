@@ -307,7 +307,7 @@ main {
 }
 
 .btn-return {
-  background-color: var(--color-next-btn);
+  background-color: var(--color-reattempt-btn);
   color: var(--color-text-main);
 
   padding: 14px 40px;
@@ -322,7 +322,7 @@ main {
 }
 
 .btn-return:hover {
-  background-color: var(--color-next-btn-hover);
+  background-color: var(--color-reattempt-hover);
   transform: scale(1.05);
 }
 
