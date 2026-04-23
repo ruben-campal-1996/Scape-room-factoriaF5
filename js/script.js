@@ -22,6 +22,5 @@ document.addEventListener("DOMContentLoaded", () => {
   if (contenedor) {
     reto1();
     volumen();
-    
   }
 });

@@ -12,7 +12,7 @@ export function reto1() {
     const btnAbandonar = document.getElementById("abandonar");
 
     if (btnAbandonar) {
-      btnAbandonar.addEventListener("click", abandonarJuego);
+      btnAbandonar.addEventListener("click", abandonarJuego());
     }
   }); // ESTO HACE QUE EL BOTON DE ABANDONAR FUNCIONE JEJE
 
