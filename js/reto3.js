@@ -240,12 +240,6 @@ document.addEventListener("touchmove", this._touchHandler);
 
     maletaWrapper.appendChild(img);
 
-    const posiciones = [
-  { top: "55%", left: "30%" },
-  { top: "50%", left: "50%" },
-  { top: "50%", left: "70%" }
-];
-
 const objetosContainer = document.createElement("div");
 objetosContainer.classList.add("objetos-container");
 
@@ -254,10 +248,12 @@ maleta.objetos.forEach((ruta, i) => {
   obj.src = ruta;
   obj.classList.add("objeto");
 
-  obj.style.animationDelay = `${i * 0.2}s`;
+  obj.style.animationDelay = `${i * 0.15}s`;
 
   objetosContainer.appendChild(obj);
 });
+
+maletaWrapper.appendChild(objetosContainer);
 
 maletaWrapper.appendChild(objetosContainer);
 
