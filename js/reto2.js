@@ -39,15 +39,19 @@ function crearTexto(tag,texto) {
     return nuevoTexto
 }
 
+const puertaSound = document.getElementById("reto2-puerta-sound");
 // ---INICIO RETO 2---
 export function reto2Contexto() {
     const main = document.querySelector("main")
-
     const link = document.createElement("link")
     link.rel = "stylesheet"
     link.href = "../css/reto2.css"
 
-document.head.appendChild(link)
+    document.head.appendChild(link)
+        puertaSound.loop = true;
+        puertaSound.currentTime = 0;
+        puertaSound.play();
+
 
     const hero = document.getElementById("reto")
     const divGeneral = crearDiv("", "general-container")
@@ -89,7 +93,8 @@ function reto2Prueba() {
     link.rel = "stylesheet"
     link.href = "../css/reto2.css"
 
-document.head.appendChild(link)
+    document.head.appendChild(link)
+
 
     const hero = document.getElementById("reto")
     const divGeneral = crearDiv("","general-container")
@@ -203,6 +208,8 @@ botonReintentar.addEventListener("click", () => {
 })
 botonContinuar.addEventListener("click", () => {
     mensajeOverlay.remove()
+    puertaSound.pause();
+    puertaSound.currentTime = 0;
     hero.innerHTML = ""
     hero.className = ""
     iniciarReto3() // La función que corresponda
