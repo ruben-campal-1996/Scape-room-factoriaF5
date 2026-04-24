@@ -177,6 +177,7 @@
 }
 
 /* TERCERA PANTALLA*/
+
 .pantalla-contexto {
   min-height: 100dvh;
   display: flex;
@@ -189,6 +190,8 @@
   position: relative;
   width: clamp(260px, 30vw, 500px);
   margin: 0 auto;
+  left: 4rem;
+  bottom: 3rem;
 
   display: flex;
   justify-content: center;
@@ -199,7 +202,7 @@
   position: absolute;
   top: 60%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
 
 display:flex;
  justify-content: center;
@@ -351,7 +354,7 @@ display:flex;
 
 
 .objetos-container {
-  width: 40%;
+  width: 20%;
 
 
 }
